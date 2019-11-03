@@ -1,0 +1,13 @@
+#homepage {
+  height: 100vh;
+  background-color: #31BAFD;
+
+  .container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding-top:5rem;
+    flex-direction: column
+   
+  }
+}
