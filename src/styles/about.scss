@@ -1,0 +1,28 @@
+#about {
+	.container {
+		.text-info {
+      display: flex;
+      height: 65%;
+      width: 70%;
+      flex-direction: column;
+      margin: auto;
+      justify-content: space-between;
+      padding-bottom: 3rem;
+      max-height: 450px;
+      border-left: 1px solid #f4f8fc;
+      padding-right: 100px;
+      padding-left: 100px;
+      border-right: 1px solid #f4f8fc;
+      p{
+        text-shadow: 1px 1px 1px #000000;
+        color:#f4f8fc;
+        text-align: center;
+        span{
+          font-weight: 550;
+          font-size:24px;
+          text-shadow: 1px 1.5px 1px #000000;
+        }
+      }
+		}
+	}
+}

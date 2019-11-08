@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	height: 100%;
+	form {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+		z-index: 10;
+    margin: auto;
+    padding-bottom:10rem;
+		.form-group {
+			text-align: center;
+			.form-label {
+        color: #f4f8fc;
+        margin-bottom:.35rem;
+        font-weight:550;
+        text-shadow: 1px 1px 1px #000000;
+			}
+    }
+    button{
+      margin-top:.5rem;
+      width:90px;
+    }
+	}
+}
+
+#register, #contacts{
+  form{
+    padding-bottom:5rem;
+  }
+}
