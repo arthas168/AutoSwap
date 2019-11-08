@@ -9,6 +9,7 @@ export default function LoginView() {
 			<Particles className="particles" />
 			<div className="container">
 				<Form>
+					<p>Once you're logged in, you can start swapping right away!</p>
 					<Form.Group controlId="formBasicUsername">
 						<Form.Label>Username</Form.Label>
 						<Form.Control type="username" placeholder="Username" />
@@ -18,7 +19,7 @@ export default function LoginView() {
 						<Form.Label>Password</Form.Label>
 						<Form.Control type="password" placeholder="Password" />
 					</Form.Group>
-				
+
 					<Button variant="secondary" type="submit">
 						Log In
 					</Button>

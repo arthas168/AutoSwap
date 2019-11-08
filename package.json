@@ -10,6 +10,7 @@
     "react-dom": "^16.11.0",
     "react-particles-js": "^2.7.0",
     "react-scripts": "3.2.0",
+    "react-select": "^3.0.8",
     "react-typed": "^1.2.0"
   },
   "scripts": {

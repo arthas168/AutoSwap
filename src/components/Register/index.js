@@ -9,6 +9,8 @@ export default function RegisterView() {
 			<Particles className="particles" />
 			<div className="container">
 				<Form>
+				<p>As soon as you register an account you can start swapping right away!</p>
+
 					<Form.Group controlId="formBasicUsername">
 						<Form.Label>Username</Form.Label>
 						<Form.Control type="username" placeholder="Username" />

@@ -7,6 +7,8 @@ export default function Contacts() {
 		<section id="contacts">
 			<div className="container">
 				<Form>
+					<p>If you have any questions about our project, feel free to send a message!</p>
+
 					<Form.Group controlId="formBasicFirstName">
 						<Form.Label>First Name</Form.Label>
 						<Form.Control type="name" placeholder="First Name" />
@@ -20,6 +22,12 @@ export default function Contacts() {
 					<Form.Group controlId="formBasicEmail">
 						<Form.Label>Email</Form.Label>
 						<Form.Control type="email" placeholder="Email Address" />
+					</Form.Group>
+
+					<Form.Group controlId="exampleForm.ControlTextarea1">
+						<Form.Label>Message</Form.Label>
+						<Form.Control as="textarea" rows="3" 
+						placeholder="Write here..."/>
 					</Form.Group>
 
 					<Button variant="secondary" type="submit">
