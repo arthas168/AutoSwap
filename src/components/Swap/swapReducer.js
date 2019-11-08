@@ -1,7 +1,6 @@
 import { UPDATE_PRICE, UPDATE_TOKEN_SELECTOR, GET_PRICES, CALC_PRICE } from './types';
 
 export default (state, action) => {
-    console.log(action)
     const { token, value } = action.payload;
     let baseAmount = state.firstAmount;
     let quoteAmount = state.secondAmount;

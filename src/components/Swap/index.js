@@ -10,6 +10,8 @@ export default function Swap() {
 
 	const swapContext = useContext(SwapContext);
 	const {
+		firstCurrency,
+		secondCurrency,
 		onUpdateTokenSelector,
 	} = swapContext;
 
@@ -24,8 +26,8 @@ export default function Swap() {
 							onChange={e => {
 								onUpdateTokenSelector(e, 'first');
 						}}
-							value={3}
-							placeholder={3}
+							value={firstCurrency.label}
+							placeholder={firstCurrency.label}
 							options={tokens}
 						/>
 						<FormControl aria-describedby="basic-addon1" />
@@ -37,8 +39,8 @@ export default function Swap() {
 							onChange={e => {
 								onUpdateTokenSelector(e, 'second');
 						}}
-							value={3}
-							placeholder={3}
+							value={secondCurrency.label}
+							placeholder={secondCurrency.label}
 							options={tokens}
 						/>
 						<FormControl aria-describedby="basic-addon1" />
