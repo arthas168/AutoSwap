@@ -3,12 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import Typed from 'react-typed';
-
+import Header from '../Header/';
 
 export default function HomePage() {
 	return (
 		<section id="homepage">
 			<Particles className="particles" />
+			<Header />
 			<div className="container">
 				<Typed
 					className="typed-text"

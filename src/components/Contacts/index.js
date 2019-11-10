@@ -1,10 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
+import Header from '../Header/';
 
 export default function Contacts() {
 	return (
 		<section id="contacts">
+			<Header />
 			<div className="container">
 				<Form>
 					<p>If you have any questions about our project, feel free to send a message!</p>
@@ -26,8 +28,7 @@ export default function Contacts() {
 
 					<Form.Group controlId="exampleForm.ControlTextarea1">
 						<Form.Label>Message</Form.Label>
-						<Form.Control as="textarea" rows="3" 
-						placeholder="Write here..."/>
+						<Form.Control as="textarea" rows="3" placeholder="Write here..." />
 					</Form.Group>
 
 					<Button variant="secondary" type="submit">

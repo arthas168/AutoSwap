@@ -6,6 +6,8 @@ import Select from "react-select";
 import customSelectStyles from "./customSelectStyles";
 import tokens from "./tokens";
 import validator from "./validator";
+import Header from '../Header/';
+
 
 export default function Swap() {
   const swapContext = useContext(SwapContext);
@@ -34,6 +36,7 @@ export default function Swap() {
 
   return (
     <section id="swap">
+      <Header />
       <div className="container">
         <div className="form">
           <p>Choose a token pair and enter the amount you wish to swap</p>

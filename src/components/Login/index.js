@@ -2,11 +2,13 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
 import Particles from 'react-particles-js';
+import Header from '../Header/';
 
 export default function LoginView() {
 	return (
 		<section id="login">
 			<Particles className="particles" />
+			<Header />
 			<div className="container">
 				<Form>
 					<p>Once you're logged in, you can start swapping right away!</p>

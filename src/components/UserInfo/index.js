@@ -2,10 +2,12 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import { Scrollbars } from 'react-custom-scrollbars';
+import Header from '../Header/';
 
 export default function UserInfo() {
 	return (
 		<section id="userInfo">
+			<Header />
 			<div className="container">
 				<div className="main-info">
 					<h1>Total Portfolio Value: 20045$</h1>
