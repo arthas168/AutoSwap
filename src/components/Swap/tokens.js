@@ -1,9 +1,9 @@
 const tokens = [
   //Bitcoin
-  {
-      value: 'btc',
-      label: 'BTC',
-  },
+//   {
+//       value: 'btc',
+//       label: 'BTC',
+//   },
   // Ethereum
   {
       value: 'eth',
