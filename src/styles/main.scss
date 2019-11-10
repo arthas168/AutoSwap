@@ -1,7 +1,8 @@
 @import 'reset';
 @import 'forms';
-@import 'homepage';
+@import 'homePage';
 @import 'swap';
+@import 'userInfo';
 @import 'about';
 
 .particles canvas {
@@ -26,3 +27,4 @@ section {
 	box-shadow: none;
 	border: none;
 }
+
