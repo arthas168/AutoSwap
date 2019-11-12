@@ -13,12 +13,26 @@ header {
 		padding-left: 5rem;
 		font-weight: 550;
 		font-family: Arial, Helvetica, sans-serif;
+		font-size: 20px;
 		li {
 			z-index: 10;
 			&:hover {
-        cursor: pointer;
-        color:white;
+				cursor: pointer;
+				color: white;
 			}
 		}
+		li:after {
+			content: '';
+			display: block;
+			width: 0%;
+			border-bottom: 3px solid #fff;
+			transition: 0.5s;
+			margin-top:.25rem;
+		}
+
+		li:hover:after {
+			width: 100%;
+		}
+
 	}
 }

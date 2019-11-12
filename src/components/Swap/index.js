@@ -84,7 +84,7 @@ export default function Swap() {
             />
           </InputGroup>
 
-          <Button variant="primary">Swap</Button>
+          <Button variant="primary">Swap Now</Button>
         </div>
       </div>
     </section>

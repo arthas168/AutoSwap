@@ -1,82 +1,137 @@
 #userInfo {
-	.container {
-		grid-template-columns: 1.25fr 1fr;
-		display: grid;
+  .container {
+    grid-template-columns: 1.25fr 1fr;
+    display: grid;
+    .green-span {
+      color: #28a745 !important;
+    }
 
-		.main-info {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 60%;
-			text-align:center;
-			justify-content: center;
-			margin-bottom:5rem;
-			margin-left:5rem;
+    .main-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 60%;
+      text-align: center;
+      justify-content: center;
+      margin-left: 5rem;
 
-			h1 {
-				font-family: Arial, Helvetica, sans-serif;
-				font-size: 34px;
-				color: #f4f8fc;
-				text-shadow: 1px 1.5px 1px #000000;
-				font-weight: 550;
-			}
-			.currencies-list {
-				width: 120%;
-				display: flex;
-				flex-direction: row;
-				align-content: center;
-				justify-content: space-around;
-				margin-top: 3rem;
-				p {
-					font-size: 20px;
-					font-weight: 550;
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 34px;
+        color: #f4f8fc;
+        text-shadow: 1px 1.5px 1px #000000;
+        font-weight: 550;
+      }
+      .currencies-list {
+        width: 160%;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-around;
+        margin-top: 1.5rem;
+        p {
+          font-size: 20px;
+          font-weight: 550;
+        }
+        .info-group {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          border: 1px solid #f4f8fc;
+          padding: 3rem;
+          padding-bottom: 2rem;
+          background-color: #3d3d3d;
+          .buttons {
+            margin-top: 1rem;
+            width: 230px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            button {
+              width: 100px;
+            }
+          }
+        }
+      }
+      .action {
+        margin-top: 2rem;
+        padding: 2rem;
+        border: solid 1px #f4f8fc;
+        background-color: #3d3d3d;
+        width: 100%;
+        position: relative;
 
-				}
-			}
-		}
-		span,
-		p {
-			color: #f4f8fc;
-			text-shadow: 1px 1px 1px #000000;
-			text-align: center;
-			font-family: Arial, Helvetica, sans-serif;
-		}
-		.transaction-list {
-			display: flex;
-			justify-content: space-between;
-			width: 100%;
-			flex-wrap: wrap;
-			margin: auto 0;
-			flex-direction:column;
+        p {
+          font-size: 20px;
+          font-weight: 550;
+        }
 
-			.scroller-area{
-				margin: 0 auto;
-			}
+        .input-group {
+          width: 60%;
+          margin-top: 2rem;
+          margin: 1rem auto;
+        }
 
-			.transaction-card {
-				width: 362px;
-				padding: 1rem;
-				border: solid 1px #f4f8fc;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				margin-bottom: 12px;
-				background-color: #3D3D3D;
+        .closer {
+          position: absolute;
+          padding: 0.25rem 0.5rem;
+          right: 12px;
+          top: 5px;
+          font-weight: 550;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      .closed {
+        display: none !important;
+      }
+      .open {
+        display: block !important;
+      }
+    }
+    span,
+    p {
+      color: #f4f8fc;
+      text-shadow: 1px 1px 1px #000000;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .transaction-list {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap;
+      margin: auto 0;
+      flex-direction: column;
 
-				button {
-					margin-top: 15px;
-					
-				}
-			}
+      .scroller-area {
+        margin: 0 auto;
+      }
 
-		.history{
-			font-size:26px;
-			margin-bottom:1rem;
-			margin-right:2rem;
-			font-weight: 550;
-			text-align:center;
-		}
-		}
-	}
+      .transaction-card {
+        width: 362px;
+        padding: 1rem;
+        border: solid 1px #f4f8fc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+        background-color: #3d3d3d;
+
+        button {
+          margin-top: 15px;
+        }
+      }
+
+      .history {
+        font-size: 26px;
+        margin-bottom: 1rem;
+        margin-right: 2rem;
+        font-weight: 550;
+        text-align: center;
+      }
+    }
+  }
 }
