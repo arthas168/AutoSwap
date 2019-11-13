@@ -6,7 +6,17 @@ import Header from "../Header/";
 
 export default function UserInfo() {
   const [isActionClosed, setIsActionClosed] = useState(false);
-  let actionBoxClass = isActionClosed ? "closed" : "open";
+  const [isActionDeposit, setIsActionDeposit] = useState(false);
+  const [chosenCurrency, setChosenCurrency] = useState("ETH");
+
+  let actionIsOpenClass = isActionClosed ? "closed" : "open";
+
+  const onBtnClick = (actionStatus, isDeposit, currency) => {
+    console.log(actionStatus, " ", isDeposit);
+    setIsActionClosed(actionStatus);
+    setIsActionDeposit(isDeposit);
+    setChosenCurrency(currency);
+  };
 
   return (
     <section id="userInfo">
@@ -22,13 +32,13 @@ export default function UserInfo() {
               <p className="green-span">786$</p>
               <div className="buttons">
                 <Button
-                  onClick={() => setIsActionClosed(false)}
+                  onClick={() => onBtnClick(false, true, "ETH")}
                   variant="success"
                 >
                   Deposit
                 </Button>
                 <Button
-                  onClick={() => setIsActionClosed(false)}
+                  onClick={() => onBtnClick(false, false, "ETH")}
                   variant="danger"
                 >
                   Withdraw
@@ -40,13 +50,13 @@ export default function UserInfo() {
               <p className="green-span">20$</p>
               <div className="buttons">
                 <Button
-                  onClick={() => setIsActionClosed(false)}
+                  onClick={() => onBtnClick(false, true, "TRX")}
                   variant="success"
                 >
                   Deposit
                 </Button>
                 <Button
-                  onClick={() => setIsActionClosed(false)}
+                  onClick={() => onBtnClick(false, false, "TRX")}
                   variant="danger"
                 >
                   Withdraw
@@ -54,18 +64,28 @@ export default function UserInfo() {
               </div>
             </div>
           </div>
-          <div className={"action " + actionBoxClass}>
+          <div className={"action " + actionIsOpenClass}>
             <span className="closer" onClick={() => setIsActionClosed(true)}>
               X
             </span>
             <p className="action-text">
-              How much <span className="green-span">ETH</span> to{" "}
-              <span className="green-span">deposit</span>?
+              How much{" "}
+              <span className={isActionDeposit ? "green-span" : "red-span"}>
+                {chosenCurrency}{" "}
+              </span>{" "}
+              to{" "}
+              <span className={isActionDeposit ? "green-span" : "red-span"}>
+                {" "}
+                {isActionDeposit ? "deposit" : "withdraw"}
+              </span>
+              ?
             </p>
             <InputGroup className="mb-3">
               <FormControl aria-describedby="basic-addon1" />
               <InputGroup.Append>
-                <Button variant="success">Deposit</Button>
+                <Button variant={isActionDeposit ? "success" : "danger"}>
+                  {isActionDeposit ? "Deposit" : "Withdraw"}
+                </Button>
               </InputGroup.Append>
             </InputGroup>
           </div>
