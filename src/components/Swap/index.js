@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import SwapContext from "./swapContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
@@ -6,8 +6,8 @@ import Select from "react-select";
 import customSelectStyles from "./customSelectStyles";
 import tokens from "./tokens";
 import validator from "./validator";
-import Header from '../Header/';
-
+import Header from "../Header/";
+import Particles from "react-particles-js";
 
 export default function Swap() {
   const swapContext = useContext(SwapContext);
@@ -35,58 +35,61 @@ export default function Swap() {
   };
 
   return (
-    <section id="swap">
+    <Fragment>
       <Header />
-      <div className="container">
-        <div className="form">
-          <p>Choose a token pair and enter the amount you wish to swap</p>
-          <InputGroup className="mb-3">
-            <Select
-              styles={customSelectStyles()}
-              onChange={e => {
-                onUpdateTokenSelector(e, "first");
-              }}
-              value={firstCurrency.label}
-              placeholder={firstCurrency.label}
-              options={tokens}
-            />
-            <FormControl
-              aria-describedby="basic-addon1"
-              as="input"
-              className="amount"
-              value={firstAmount}
-              placeholder="0"
-              onChange={e => {
-                handleInputChange(e.target.value, "first");
-              }}
-            />
-          </InputGroup>
+      <section id="swap">
+        <Particles className="particles" />
+        <div className="container">
+          <div className="form">
+            <p>Choose a token pair and enter the amount you wish to swap</p>
+            <InputGroup className="mb-3">
+              <Select
+                styles={customSelectStyles()}
+                onChange={e => {
+                  onUpdateTokenSelector(e, "first");
+                }}
+                value={firstCurrency.label}
+                placeholder={firstCurrency.label}
+                options={tokens}
+              />
+              <FormControl
+                aria-describedby="basic-addon1"
+                as="input"
+                className="amount"
+                value={firstAmount}
+                placeholder="0"
+                onChange={e => {
+                  handleInputChange(e.target.value, "first");
+                }}
+              />
+            </InputGroup>
 
-          <InputGroup className="mb-3">
-            <Select
-              styles={customSelectStyles()}
-              onChange={e => {
-                onUpdateTokenSelector(e, "second");
-              }}
-              value={secondCurrency.label}
-              placeholder={secondCurrency.label}
-              options={tokens}
-            />
-            <FormControl
-              aria-describedby="basic-addon1"
-              as="input"
-              className="amount"
-              value={secondAmount}
-              placeholder="0"
-              onChange={e => {
-                handleInputChange(e.target.value, "second");
-              }}
-            />
-          </InputGroup>
+            <InputGroup className="mb-3">
+              <Select
+                styles={customSelectStyles()}
+                onChange={e => {
+                  onUpdateTokenSelector(e, "second");
+                }}
+                value={secondCurrency.label}
+                placeholder={secondCurrency.label}
+                options={tokens}
+              />
+              <FormControl
+                aria-describedby="basic-addon1"
+                as="input"
+                className="amount"
+                value={secondAmount}
+                placeholder="0"
+                onChange={e => {
+                  handleInputChange(e.target.value, "second");
+                }}
+              />
+            </InputGroup>
 
-          <Button variant="primary">Swap Now</Button>
+            <Button variant="primary">Swap Now</Button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Fragment>
   );
 }

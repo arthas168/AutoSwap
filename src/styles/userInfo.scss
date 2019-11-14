@@ -1,5 +1,6 @@
 #userInfo {
   .container {
+   
     grid-template-columns: 1.25fr 1fr;
     display: grid;
     .green-span {
@@ -37,6 +38,7 @@
           font-weight: 550;
         }
         .info-group {
+          z-index:10;
           display: flex;
           justify-content: space-between;
           flex-direction: column;
