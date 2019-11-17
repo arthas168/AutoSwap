@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import Particles from "react-particles-js";
 import Typed from "react-typed";
 import Header from "../Header/";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
@@ -21,10 +22,16 @@ export default function HomePage() {
           />
           <h1>Atomic Swap Service</h1>
           <div className="buttons-wrapper">
-            <Button href="/login" variant="primary">Log In</Button>
-            <Button href="/register" variant="secondary">
-              Don't have an account? Register now!
-            </Button>
+            <Link to="/login">
+              <Button variant="primary">
+                Log In
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button variant="secondary">
+                Don't have an account? Register now!
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
