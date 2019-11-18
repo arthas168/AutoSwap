@@ -4,6 +4,7 @@ import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { Scrollbars } from "react-custom-scrollbars";
 import Header from "../Header/";
 import Particles from "react-particles-js";
+import { Link } from "react-router-dom";
 
 export default function UserInfo() {
   const [isActionClosed, setIsActionClosed] = useState(true);
@@ -103,54 +104,72 @@ export default function UserInfo() {
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
 
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
               <div className="transaction-card">
                 <p>Exchanged: X ETH for Y TRX</p>
                 <p>On date: 21-11-2019</p>
-                <Button variant="primary">More Info</Button>
+                <Link to="/transaction">
+                  <Button variant="primary">More Info</Button>
+                </Link>
               </div>
             </Scrollbars>
           </div>
