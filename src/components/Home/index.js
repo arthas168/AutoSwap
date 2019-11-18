@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import Particles from "react-particles-js";
 import Typed from "react-typed";
 import Header from "../Header/";
+import Footer from "../Footer";
 
 export default function HomePage() {
   return (
@@ -28,6 +29,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <Footer/>
     </Fragment>
   );
 }
