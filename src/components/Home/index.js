@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import Particles from "react-particles-js";
 import Typed from "react-typed";
 import Header from "../Header/";
-// import Footer from "../Footer";
+import Footer from "../Footer";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
@@ -36,7 +36,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* <Footer/> */}
+      <Footer/>
     </Fragment>
   );
 }

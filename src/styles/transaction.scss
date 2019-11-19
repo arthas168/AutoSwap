@@ -1,34 +1,37 @@
 #transaction {
-  .container {
-    .info-table {
-      position: relative;
-      z-index: 10;
-      color: #f4f8fc;
-      font-family: Arial, Helvetica, sans-serif;
-      justify-content: space-around;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      padding: 1.5rem;
-      height: 345px;
-      margin: auto;
-      text-shadow: 1px 1px 1px #000000;
-      background-color: #3d3d3d;
-      border: 1px solid #f4f8fc;
-      min-width: 740px;
-      span {
-        color: #28a745;
-      }
-      .back {
-        position: absolute;
-        top: -45px;
-        left: 330px;
-        text-decoration: underline;
-        font-size: 18px;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-    }
-  }
+	.container {
+		.info-table {
+			position: relative;
+			z-index: 10;
+			color: #f4f8fc;
+			font-family: Arial, Helvetica, sans-serif;
+			justify-content: space-around;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			padding: 1.5rem;
+			height: 345px;
+			margin: auto;
+			text-shadow: 1px 1px 1px #000000;
+			background-color: #3d3d3d;
+			border: 1px solid #f4f8fc;
+			min-width: 740px;
+			span {
+				color: #28a745;
+			}
+			.back {
+				position: absolute;
+				top: -45px;
+				left: 330px;
+				text-decoration: underline;
+				font-size: 18px;
+
+				color: #f4f8fc !important;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
 }
