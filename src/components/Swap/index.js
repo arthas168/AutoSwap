@@ -7,6 +7,7 @@ import customSelectStyles from "./customSelectStyles";
 import tokens from "./tokens";
 import validator from "./validator";
 import Header from "../Header/";
+import Footer from "../Footer/";
 import Particles from "react-particles-js";
 
 export default function Swap() {
@@ -90,6 +91,7 @@ export default function Swap() {
           </div>
         </div>
       </section>
+      <Footer />
     </Fragment>
   );
 }

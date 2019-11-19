@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { Scrollbars } from "react-custom-scrollbars";
 import Header from "../Header/";
+import Footer from "../Footer/";
 import Particles from "react-particles-js";
 import { Link } from "react-router-dom";
 
@@ -175,6 +176,7 @@ export default function UserInfo() {
           </div>
         </div>
       </section>
+      <Footer />
     </Fragment>
   );
 }
