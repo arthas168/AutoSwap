@@ -24,7 +24,7 @@ header {
         text-decoration: none !important;
       }
     }
-    li:after {
+    a:after {
       content: "";
       display: block;
       width: 0%;
@@ -33,7 +33,8 @@ header {
       margin-top: 0.25rem;
     }
 
-    li:hover:after {
+    a:hover:after,
+    a.selected:after {
       width: 100%;
     }
   }

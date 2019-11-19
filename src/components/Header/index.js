@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function Header() {
 	return (
 		<header>
 			<ul>
-				<li><Link to="/">Home</Link></li>
-				<li><Link to="/about">About</Link></li>
-				<li><Link to="/contacts">Contacts</Link></li>
-				<li><Link to="/swap">Swap</Link></li>
-				<li><Link to="/user">My Profile</Link></li>
+				<li><NavLink activeClassName="selected" exact to="/">Home</NavLink></li>
+				<li><NavLink activeClassName="selected" to="/about">About</NavLink></li>
+				<li><NavLink activeClassName="selected" to="/contacts">Contacts</NavLink></li>
+				<li><NavLink activeClassName="selected" to="/swap">Swap</NavLink></li>
+				<li><NavLink activeClassName="selected" to="/user">My Profile</NavLink></li>
 			</ul>
 		</header>
 	);

@@ -15,7 +15,7 @@ export const calcPrice = (value, token) => ({
 
 export const getPrices = async () => {
     try {
-        const res = await axios.get('https://spacejelly.network/price');
+        const res = await axios.get('https://spacejelly.network/price/');
         return {
             type: GET_PRICES,
             payload: { prices: res.data },
