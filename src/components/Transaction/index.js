@@ -9,16 +9,7 @@ export default function index() {
         <Particles className="particles" />
         <div className="container">
           <div className="info-table">
-              <div className="keys">
-
-
-
-              </div>
-              <div className="values">
-
-
-                
-              </div>
+            <p className="back">Back</p>
             <p>
               Transaction ID - <span>7534873</span>
             </p>

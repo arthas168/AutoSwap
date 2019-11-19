@@ -8,6 +8,7 @@ export const updatePrice = (value, token) => ({
     payload: { value, token },
 });
 
+
 export const calcPrice = (value, token) => ({
     type: CALC_PRICE,
     payload: { value, token },
