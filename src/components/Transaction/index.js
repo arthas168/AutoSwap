@@ -10,8 +10,8 @@ export default function index() {
 				<Particles className="particles" />
 				<div className="container">
 					<div className="info-table">
-						<NavLink activeClassName="selected" to="/user">
-							<p className="back">Back</p>
+						<NavLink to="/user">
+							<p className="back">{"<"}</p>
 						</NavLink>
 
 						<p>
