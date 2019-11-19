@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Header() {
 	return (
-		<header>
+		<header id="header">
 			<ul>
 				<li><NavLink activeClassName="selected" exact to="/">Home</NavLink></li>
 				<li><NavLink activeClassName="selected" to="/about">About</NavLink></li>
