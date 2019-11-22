@@ -10,7 +10,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		width: 50%;
-		width: 600px;
+		width: 700px;
 		padding-top: 2.5rem;
 		padding-left: 5rem;
 		font-weight: 550;
@@ -43,10 +43,11 @@
 
 		&:nth-child(2) {
 			justify-content: flex-end;
+			width:400px;
 			button {
 				margin-left: 1.5rem;
 			}
-			span {
+			li {
 				color: #f4f8fc;
 			}
 		}

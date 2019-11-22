@@ -44,28 +44,43 @@ export default (state, action) => {
                 secondAmount: action.payload.token === 'second' ? value : state.secondAmount,
             };
 
-        case UPDATE_TOKEN_SELECTOR: {
-            const { prices } = state;
+        case UPDATE_TOKEN_SELECTOR:
+            if (token === 'first') {
+                quoteAmount =
+                    baseAmount *
+                    state.prices[value.value.toUpperCase().toString()][
+                        state.secondCurrency.value.toUpperCase().toString()
+                    ];
+                quoteAmount = parseFloat(
+                    Number(quoteAmount).toFixed(state.secondCurrency.decimals)
+                );
+                baseAmount = parseFloat(Number(baseAmount).toFixed(value.decimals));
 
-            if (prices) {
-                if (token === 'first') {
-                    quoteAmount = baseAmount * prices[value.label][quoteTokenName];
-                    quoteAmount = parseFloat(Number(quoteAmount).toFixed(quoteDecimals));
-                    baseAmount = parseFloat(Number(baseAmount).toFixed(value.decimals));
-                }
-                if (token === 'second') {
-                    baseAmount = quoteAmount * state.prices[value.label][baseTokenName];
-                    baseAmount = parseFloat(Number(baseAmount).toFixed(baseDecimals));
-                    quoteAmount = parseFloat(Number(quoteAmount).toFixed(value.decimals));
-                }
+                return {
+                    ...state,
+                    secondAmount: quoteAmount,
+                    firstAmount: baseAmount,
+                    firstCurrency: value,
+                };
             }
-            return {
-                ...state,
-                secondAmount: quoteAmount,
-                firstAmount: baseAmount,
-                firstCurrency: value,
-            };
-        }
+            if (token === 'second') {
+                baseAmount =
+                    quoteAmount *
+                    state.prices[value.value.toUpperCase().toString()][
+                        state.firstCurrency.value.toUpperCase().toString()
+                    ];
+                baseAmount = parseFloat(Number(baseAmount).toFixed(state.firstCurrency.decimals));
+                quoteAmount = parseFloat(Number(quoteAmount).toFixed(value.decimals));
+
+                return {
+                    ...state,
+                    firstAmount: baseAmount,
+                    secondAmount: quoteAmount,
+                    secondCurrency: value,
+                };
+            }
+
+            return '';
 
         default:
             return '';

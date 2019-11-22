@@ -1,27 +1,30 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useContext } from 'react';
+import GlobalContext from '../GlobalState/globalContext';
 import fire from '../../config/Fire';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-export default function Header() {
-	const [user, setUser] = useState();
+function Header(props) {
+	const globalContext = useContext(GlobalContext);
+	const { onUserAuth, userEmail } = globalContext;
 
 	const authListener = async () => {
 		fire.auth().onAuthStateChanged(user => {
 			if (user) {
-				setUser(user);
+				onUserAuth(user.email);
 			} else {
-				setUser(null);
+				onUserAuth('');
 			}
 		});
 	};
 
 	useLayoutEffect(() => {
 		authListener();
-	});
+	}, []);
 
 	const logout = () => {
 		fire.auth().signOut();
+		props.history.push('/');
 	};
 
 	return (
@@ -42,14 +45,14 @@ export default function Header() {
 						Contacts
 					</NavLink>
 				</li>
-				{user ? (
+				{userEmail !== '' ? (
 					<li>
 						<NavLink activeClassName="selected" to="/swap">
 							Swap
 						</NavLink>
 					</li>
 				) : null}
-				{user ? (
+				{userEmail !== '' ? (
 					<li>
 						<NavLink activeClassName="selected" to="/user">
 							My Profile
@@ -57,8 +60,12 @@ export default function Header() {
 					</li>
 				) : null}
 			</ul>
-			{user ? (
+			{userEmail !== '' ? (
 				<ul>
+					<li>
+						{userEmail}
+					</li>
+
 					<li>
 						<Button
 							variant="primary"
@@ -75,3 +82,5 @@ export default function Header() {
 		</header>
 	);
 }
+
+export default withRouter(Header);
