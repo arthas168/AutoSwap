@@ -1,41 +1,52 @@
 #header {
-  position: absolute;
-  ul {
-    padding: 1rem;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 50%;
-    width: 600px;
-    padding-top: 2.5rem;
-    padding-left: 5rem;
-    font-weight: 550;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    li {
-      z-index: 10;
-      & a:hover {
-        cursor: pointer;
-        color: white;
-      }
-      a {
-        color: #f4f8fc;
-        text-decoration: none !important;
-      }
-    }
-    a:after {
-      content: "";
-      display: block;
-      width: 0%;
-      border-bottom: 3px solid #fff;
-      transition: 0.5s;
-      margin-top: 0.25rem;
-    }
+	position: absolute;
+	display: flex;
+	ul {
+		padding: 1rem;
+		list-style: none;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 50%;
+		width: 600px;
+		padding-top: 2.5rem;
+		padding-left: 5rem;
+		font-weight: 550;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 20px;
+		li {
+			z-index: 10;
+			& a:hover {
+				cursor: pointer;
+				color: white;
+			}
+			a {
+				color: #f4f8fc;
+				text-decoration: none !important;
+			}
+		}
+		a:after {
+			content: '';
+			display: block;
+			width: 0%;
+			border-bottom: 3px solid #fff;
+			transition: 0.5s;
+			margin-top: 0.25rem;
+		}
 
-    a:hover:after,
-    a.selected:after {
-      width: 100%;
-    }
-  }
+		a:hover:after,
+		a.selected:after {
+			width: 100%;
+		}
+
+		&:nth-child(2) {
+      justify-content: flex-end;
+      button{
+        margin-left:1.5rem;
+      }
+      span{
+        color:#f4f8fc;
+      }
+		}
+	}
 }

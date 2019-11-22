@@ -1,11 +1,34 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import fire from '../../config/Fire';
 import { Button, Form } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import Header from '../Header/';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter} from 'react-router-dom';
 
-export default function LoginView() {
+function LoginView(props) {
+	const [email, setEmail] = useState();
+	const [password, setPassword] = useState();
+
+	const login = e => {
+		e.preventDefault();
+		fire.auth()
+			.signInWithEmailAndPassword(email, password)
+			.then(u => {})
+			.catch(error => {
+				console.log(error);
+			});
+		props.history.push("/")
+	};
+
+	const onChangeEmail = email => {
+		setEmail(email);
+	};
+
+	const onChangePass = password => {
+		setPassword(password);
+	};
+
 	return (
 		<Fragment>
 			<Header />
@@ -14,20 +37,28 @@ export default function LoginView() {
 				<div className="container">
 					<Form>
 						<NavLink to="/">
-							<span className="back">{"<"}</span>
+							<span className="back">{'<'}</span>
 						</NavLink>
 						<p>Once you're logged in, you can start swapping right away!</p>
 						<Form.Group controlId="formBasicUsername">
-							<Form.Label>Username</Form.Label>
-							<Form.Control type="username" placeholder="Username" />
+							<Form.Label>Email</Form.Label>
+							<Form.Control
+								type="email"
+								placeholder="Email"
+								onChange={e => onChangeEmail(e.target.value)}
+							/>
 						</Form.Group>
 
 						<Form.Group controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" />
+							<Form.Control
+								type="password"
+								placeholder="Password"
+								onChange={e => onChangePass(e.target.value)}
+							/>
 						</Form.Group>
 
-						<Button variant="primary" type="submit">
+						<Button variant="primary" type="submit" onClick={e => login(e)}>
 							Log In
 						</Button>
 					</Form>
@@ -36,3 +67,5 @@ export default function LoginView() {
 		</Fragment>
 	);
 }
+
+export default withRouter(LoginView)
