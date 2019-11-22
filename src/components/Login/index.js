@@ -4,7 +4,7 @@ import fire from '../../config/Fire';
 import { Button, Form } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import Header from '../Header/';
-import { NavLink, withRouter} from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 function LoginView(props) {
 	const [email, setEmail] = useState();
@@ -18,7 +18,7 @@ function LoginView(props) {
 			.catch(error => {
 				console.log(error);
 			});
-		props.history.push("/")
+		props.history.push('/');
 	};
 
 	const onChangeEmail = email => {
@@ -68,4 +68,4 @@ function LoginView(props) {
 	);
 }
 
-export default withRouter(LoginView)
+export default withRouter(LoginView);
