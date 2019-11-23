@@ -5,6 +5,8 @@ import Countdown from 'react-countdown-now';
 import { withRouter } from 'react-router-dom';
 
 function index(props) {
+
+	console.log(props);
 	const renderer = ({ seconds, completed }) => {
 		if (completed) {
 			props.history.push('/');
@@ -19,10 +21,26 @@ function index(props) {
 			<Particles className="particles" />
 			<div className="container">
 				<Spinner className="spinner" animation="border" variant="primary" />
-				<h1>
-					Oops! Invalid URL :( <br></br> Redirecting to home page...{' '}
-					<Countdown date={Date.now() + 5000} renderer={renderer} />s
-				</h1>
+				{props.reason === 'userNotLogged' ? (
+					<h1>
+						Oops! Permission denied :(<br></br>
+						<br></br> Redirecting to home page... <Countdown date={Date.now() + 5000} renderer={renderer} />
+						s
+					</h1>
+				) : (
+					props.reason==="userAlreadyLogged" ?
+					(<h1>
+						Oops! You are already logged in :( <br></br>
+						<br></br> Redirecting to home page... <Countdown date={Date.now() + 5000} renderer={renderer} />
+						s
+					</h1>)
+					:
+					(<h1>
+						Oops! Invalid URL :( <br></br>
+						<br></br> Redirecting to home page... <Countdown date={Date.now() + 5000} renderer={renderer} />
+						s
+					</h1>)
+				)}
 			</div>
 		</section>
 	);

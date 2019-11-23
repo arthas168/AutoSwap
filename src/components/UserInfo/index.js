@@ -1,4 +1,6 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
+import GlobalContext from "../GlobalState/globalContext"
+import InvalidUrl from "../InvalidUrl"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { Scrollbars } from "react-custom-scrollbars";
@@ -8,6 +10,10 @@ import Particles from "react-particles-js";
 import { Link } from "react-router-dom";
 
 export default function UserInfo() {
+
+  const globalContext = useContext(GlobalContext);
+	const { userEmail } = globalContext;
+
   const [isActionClosed, setIsActionClosed] = useState(true);
   const [isActionDeposit, setIsActionDeposit] = useState(false);
   const [chosenCurrency, setChosenCurrency] = useState("ETH");
@@ -22,6 +28,7 @@ export default function UserInfo() {
   };
 
   return (
+    userEmail !== '' ?
     <Fragment>
       <Header />
       <section id="userInfo">
@@ -178,5 +185,7 @@ export default function UserInfo() {
       </section>
       <Footer />
     </Fragment>
+    :
+    <InvalidUrl reason="userNotLogged"/>
   );
 }

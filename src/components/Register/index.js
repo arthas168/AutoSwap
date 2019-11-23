@@ -1,4 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
+import GlobalContext from "../GlobalState/globalContext";
+import InvalidUrl from "../InvalidUrl";
 import fire from '../../config/Fire';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
@@ -7,6 +9,10 @@ import Header from '../Header/';
 import { NavLink } from 'react-router-dom';
 
 export default function RegisterView(props) {
+
+	const globalContext = useContext(GlobalContext);
+	const { userEmail } = globalContext;
+
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 	const [repeatPassword, setRepeatPassword] = useState();
@@ -40,6 +46,7 @@ export default function RegisterView(props) {
 	}
 
 	return (
+		userEmail === '' ?
 		<Fragment>
 			<Header />
 			<section id="register">
@@ -79,5 +86,7 @@ export default function RegisterView(props) {
 				</div>
 			</section>
 		</Fragment>
+		:
+		<InvalidUrl reason="userAlreadyLogged"/>
 	);
 }

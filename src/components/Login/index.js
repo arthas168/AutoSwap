@@ -1,4 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
+import GlobalContext from "../GlobalState/globalContext";
+import InvalidUrl from "../InvalidUrl";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fire from '../../config/Fire';
 import { Button, Form } from 'react-bootstrap';
@@ -7,6 +9,9 @@ import Header from '../Header/';
 import { NavLink, withRouter } from 'react-router-dom';
 
 function LoginView(props) {
+	const globalContext = useContext(GlobalContext);
+	const { userEmail } = globalContext;
+
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 
@@ -30,6 +35,7 @@ function LoginView(props) {
 	};
 
 	return (
+		userEmail === '' ?
 		<Fragment>
 			<Header />
 			<section id="login">
@@ -65,6 +71,8 @@ function LoginView(props) {
 				</div>
 			</section>
 		</Fragment>
+		:
+		<InvalidUrl reason="userAlreadyLogged"/>
 	);
 }
 
