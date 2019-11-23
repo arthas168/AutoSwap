@@ -6,7 +6,6 @@ import InvalidUrl from "./components/InvalidUrl"
 import HomePage from './components/Home';
 import Swap from './components/Swap';
 import UserInfo from './components/UserInfo';
-import Transaction from './components/Transaction';
 import LoginView from './components/Login';
 import RegisterView from './components/Register';
 import About from './components/About';
@@ -22,7 +21,6 @@ function AtomicSwap() {
 						<Route path="/" exact component={HomePage} />
 						<Route path="/swap" component={Swap} />
 						<Route path="/user" component={UserInfo} />
-						<Route path="/transaction" component={Transaction} />
 						<Route path="/login" component={LoginView} />
 						<Route path="/register" component={RegisterView} />
 						<Route path="/about" component={About} />

@@ -13,7 +13,7 @@ import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 
 export default function Swap() {
-	const globalContext = useContext(GlobalContext);
+	const globalContext =  useContext(GlobalContext);
 	const { userEmail } = globalContext;
 
 	const swapContext = useContext(SwapContext);
