@@ -8,13 +8,13 @@ import Header from '../Header/';
 import Footer from '../Footer';
 import { Link } from 'react-router-dom';
 
-export default function HomePage() {
+export default function Home() {
 	const globalContext = useContext(GlobalContext);
 	const { userEmail } = globalContext;
 	return (
 		<Fragment>
 			<Header />
-			<section id="homepage">
+			<section id="home">
 				<Particles className="particles" />
 				<div className="container">
 					<Typed

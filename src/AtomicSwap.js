@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GlobalState from './components/GlobalState';
 import SwapState from './components/Swap/swapState';
+import InvalidUrl from "./components/InvalidUrl"
 import HomePage from './components/Home';
 import Swap from './components/Swap';
 import UserInfo from './components/UserInfo';
@@ -26,6 +27,7 @@ function AtomicSwap() {
 						<Route path="/register" component={RegisterView} />
 						<Route path="/about" component={About} />
 						<Route path="/contacts" component={Contacts} />
+						<Route path="*" component={InvalidUrl} />
 					</Switch>
 				</Router>
 			</SwapState>
