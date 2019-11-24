@@ -42,13 +42,21 @@
 		}
 
 		&:nth-child(2) {
-			justify-content: flex-end;
-			width:400px;
+			width: 400px;
 			button {
 				margin-left: 1.5rem;
 			}
 			li {
 				color: #f4f8fc;
+			}
+			padding-left: 0;
+
+			.toggle-mode {
+				width: 50px;
+				margin-top: -9px;
+				&:hover{
+					cursor:pointer;
+				}
 			}
 		}
 	}

@@ -1,12 +1,13 @@
-import React, { useLayoutEffect, useState, useContext } from 'react';
+import React, { useLayoutEffect, useContext } from 'react';
 import GlobalContext from '../GlobalState/globalContext';
 import fire from '../../config/Fire';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import ReactTooltip from 'react-tooltip';
 
 function Header(props) {
 	const globalContext = useContext(GlobalContext);
-	const { onUserAuth, userEmail } = globalContext;
+	const { userEmail, isDayMode, onUserAuth, onToggleMode } = globalContext;
 
 	const authListener = async () => {
 		fire.auth().onAuthStateChanged(user => {
@@ -63,8 +64,21 @@ function Header(props) {
 			{userEmail !== '' ? (
 				<ul>
 					<li>
-						{userEmail}
+						<img
+							src={
+								isDayMode
+									? require('../../images/toggle-day.png')
+									: require('../../images/toggle-night.png')
+							}
+							data-tip="Toggle Day/Night Mode"
+							className="toggle-mode"
+							alt="toggle-mode"
+							onClick={() => onToggleMode()}
+						></img>
+						<ReactTooltip place="top" type="dark" effect="float" />
 					</li>
+
+					<li>{userEmail}</li>
 
 					<li>
 						<Button
