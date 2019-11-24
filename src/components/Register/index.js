@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 export default function RegisterView(props) {
 
 	const globalContext = useContext(GlobalContext);
-	const { userEmail } = globalContext;
+	const { userEmail, isDayMode } = globalContext;
 
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
@@ -74,7 +74,7 @@ export default function RegisterView(props) {
 						</Form.Group>
 
 						<Button
-							variant="primary"
+							variant={isDayMode ? "info" : "primary"}
 							type="submit"
 							onClick={e => {
 								register(e);

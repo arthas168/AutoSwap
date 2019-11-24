@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
 	const globalContext = useContext(GlobalContext);
-	const { userEmail } = globalContext;
+	const { userEmail, isDayMode } = globalContext;
 	return (
 		<Fragment>
 			<Header />
@@ -29,16 +29,18 @@ export default function Home() {
 					{userEmail === '' ? (
 						<div className="buttons-wrapper">
 							<Link to="/login">
-								<Button variant="primary">Log In</Button>
+								<Button variant={isDayMode ? 'info' : 'primary'}>Log In</Button>
 							</Link>
 							<Link to="/register">
-								<Button variant="secondary">Don't have an account? Register now!</Button>
+								<Button variant={isDayMode ? 'outline-dark' : 'secondary'}>
+									Don't have an account? Register now!
+								</Button>
 							</Link>
 						</div>
 					) : (
 						<div className="buttons-wrapper logged">
 							<Link to="/swap">
-								<Button variant="primary">Swap Now</Button>
+								<Button variant={isDayMode ? 'info' : 'primary'}>Swap Now</Button>
 							</Link>
 						</div>
 					)}

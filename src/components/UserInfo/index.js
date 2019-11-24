@@ -11,7 +11,7 @@ import Transaction from '../Transaction';
 
 export default function UserInfo() {
 	const globalContext = useContext(GlobalContext);
-	const { userEmail } = globalContext;
+	const { userEmail, isDayMode } = globalContext;
 
 	const [isActionClosed, setIsActionClosed] = useState(true);
 	const [isActionDeposit, setIsActionDeposit] = useState(false);
@@ -109,7 +109,7 @@ export default function UserInfo() {
 								<p>Exchanged: X ETH for Y TRX</p>
 								<p>On date: 21-11-2019</p>
 
-								<Button variant="primary" onClick={ () => onMoreInfoBtn()}>
+								<Button variant={isDayMode ? "info" : "primary"} onClick={ () => onMoreInfoBtn()}>
 									More Info
 								</Button>
 							</div>
@@ -118,31 +118,31 @@ export default function UserInfo() {
 								<p>Exchanged: X ETH for Y TRX</p>
 								<p>On date: 21-11-2019</p>
 
-								<Button variant="primary">More Info</Button>
+								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
 							</div>
 							<div className="transaction-card">
 								<p>Exchanged: X ETH for Y TRX</p>
 								<p>On date: 21-11-2019</p>
 
-								<Button variant="primary">More Info</Button>
+								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
 							</div>
 							<div className="transaction-card">
 								<p>Exchanged: X ETH for Y TRX</p>
 								<p>On date: 21-11-2019</p>
 
-								<Button variant="primary">More Info</Button>
+								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
 							</div>
 							<div className="transaction-card">
 								<p>Exchanged: X ETH for Y TRX</p>
 								<p>On date: 21-11-2019</p>
 
-								<Button variant="primary">More Info</Button>
+								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
 							</div>
 							<div className="transaction-card">
 								<p>Exchanged: X ETH for Y TRX</p>
 								<p>On date: 21-11-2019</p>
 
-								<Button variant="primary">More Info</Button>
+								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
 							</div>
 						</Scrollbars>
 					</div>

@@ -10,7 +10,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 function LoginView(props) {
 	const globalContext = useContext(GlobalContext);
-	const { userEmail } = globalContext;
+	const { userEmail, isDayMode } = globalContext;
 
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
@@ -64,7 +64,7 @@ function LoginView(props) {
 							/>
 						</Form.Group>
 
-						<Button variant="primary" type="submit" onClick={e => login(e)}>
+						<Button variant={isDayMode ? "info" : "primary"} type="submit" onClick={e => login(e)}>
 							Log In
 						</Button>
 					</Form>

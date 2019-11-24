@@ -10,6 +10,13 @@ const GlobalState = props => {
 		isDayMode: false,
 	};
 	const [state, dispatch] = useReducer(GlobalReducer, initialState);
+	if(state.isDayMode){
+		document.body.classList.remove("night");
+		document.body.classList.add("day");
+	}else{
+		document.body.classList.remove("day");
+		document.body.classList.add("night");
+	}
 
 	const onUserAuth = value => dispatch(userAuth(value));
 	const onToggleMode = value => dispatch(toggleMode(value));

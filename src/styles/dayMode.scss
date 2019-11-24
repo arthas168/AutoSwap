@@ -1,0 +1,70 @@
+body.day {
+	section {
+		background: #4ca1af;
+		background: -webkit-linear-gradient(to top, #c4e0e5, #4ca1af);
+		background: linear-gradient(to top, #c4e0e5, #4ca1af);
+	}
+
+	#home {
+		h1,
+		.typed-text {
+			color: #f4f8fc;
+			text-shadow: 1px 1px 1px #000000;
+		}
+	}
+
+	#about {
+		.text-info {
+			border-left: 1px solid #333;
+			border-right: 1px solid #333;
+		}
+
+		p,
+		span {
+			color: #333 !important;
+			text-shadow: none !important;
+		}
+	}
+
+	.container {
+		form p,
+		form label {
+			text-shadow: none !important;
+		}
+	}
+
+	#swap {
+		.form {
+			background-color: #71b4bf;
+			p {
+				text-shadow: none !important;
+			}
+		}
+	}
+
+#userInfo{
+	.container{
+		span, h1, p {
+			text-shadow:none;
+		}
+		.info-group{
+			background: none !important;
+		}
+		.transaction-card{
+			background-color:#71B4BF;
+		}
+
+		.info-table{
+			background:none;
+			
+		}
+	}
+}
+
+	#footer {
+		ul {
+			background-color: #4CA1AF;
+		}
+	}
+
+}

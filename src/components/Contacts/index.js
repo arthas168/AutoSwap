@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+import GlobalContext from '../GlobalState/globalContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
 import Header from '../Header/';
@@ -6,6 +7,8 @@ import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 
 export default function Contacts() {
+	const globalContext = useContext(GlobalContext);
+	const { isDayMode } = globalContext;
 	return (
 		<Fragment>
 			<Header />
@@ -35,7 +38,7 @@ export default function Contacts() {
 							<Form.Control as="textarea" rows="3" placeholder="Write here..." />
 						</Form.Group>
 
-						<Button variant="secondary" type="submit">
+						<Button variant={isDayMode ? "outline-dark" : "secondary"} type="submit">
 							Submit
 						</Button>
 					</Form>

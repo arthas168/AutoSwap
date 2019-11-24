@@ -61,28 +61,29 @@ function Header(props) {
 					</li>
 				) : null}
 			</ul>
-			{userEmail !== '' ? (
-				<ul>
-					<li>
-						<img
-							src={
-								isDayMode
-									? require('../../images/toggle-day.png')
-									: require('../../images/toggle-night.png')
-							}
-							data-tip="Toggle Day/Night Mode"
-							className="toggle-mode"
-							alt="toggle-mode"
-							onClick={() => onToggleMode()}
-						></img>
-						<ReactTooltip place="top" type="dark" effect="float" />
-					</li>
 
-					<li>{userEmail}</li>
+			<ul>
+				<li>
+					<img
+						src={
+							isDayMode
+								? require('../../images/toggle-day.png')
+								: require('../../images/toggle-night.png')
+						}
+						data-tip="Toggle Day/Night Mode"
+						className="toggle-mode"
+						alt="toggle-mode"
+						onClick={() => onToggleMode()}
+					></img>
+					<ReactTooltip place="top" type="dark" effect="float" />
+				</li>
 
+				{userEmail !== '' ? <li>{userEmail}</li> : null}
+
+				{userEmail !== '' ? (
 					<li>
 						<Button
-							variant="primary"
+							variant={isDayMode ? "info" : "primary"}
 							type="submit"
 							onClick={() => {
 								logout();
@@ -91,8 +92,8 @@ function Header(props) {
 							Log Out
 						</Button>
 					</li>
-				</ul>
-			) : null}
+				) : null}
+			</ul>
 		</header>
 	);
 }

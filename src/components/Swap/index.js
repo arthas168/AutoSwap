@@ -14,7 +14,7 @@ import Particles from 'react-particles-js';
 
 export default function Swap() {
 	const globalContext =  useContext(GlobalContext);
-	const { userEmail } = globalContext;
+	const { userEmail, isDayMode } = globalContext;
 
 	const swapContext = useContext(SwapContext);
 	const {
@@ -91,7 +91,7 @@ export default function Swap() {
 							/>
 						</InputGroup>
 
-						<Button variant="primary">Swap Now</Button>
+						<Button variant={ isDayMode ? "info" : "primary"}>Swap Now</Button>
 					</div>
 				</div>
 			</section>
