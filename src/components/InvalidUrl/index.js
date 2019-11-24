@@ -5,7 +5,6 @@ import Countdown from 'react-countdown-now';
 import { withRouter } from 'react-router-dom';
 
 function index(props) {
-
 	console.log(props);
 	const renderer = ({ seconds, completed }) => {
 		if (completed) {
@@ -27,19 +26,14 @@ function index(props) {
 						<br></br> Redirecting to home page... <Countdown date={Date.now() + 5000} renderer={renderer} />
 						s
 					</h1>
+				) : props.reason === 'userAlreadyLogged' ? (
+					<Countdown date={Date.now()} renderer={renderer} />
 				) : (
-					props.reason==="userAlreadyLogged" ?
-					(<h1>
-						Oops! You are already logged in :( <br></br>
-						<br></br> Redirecting to home page... <Countdown date={Date.now()} renderer={renderer} />
-						s
-					</h1>)
-					:
-					(<h1>
+					<h1>
 						Oops! Invalid URL :( <br></br>
 						<br></br> Redirecting to home page... <Countdown date={Date.now() + 5000} renderer={renderer} />
 						s
-					</h1>)
+					</h1>
 				)}
 			</div>
 		</section>
