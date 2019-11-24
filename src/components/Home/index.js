@@ -37,7 +37,7 @@ export default function Home() {
 								</Button>
 							</Link>
 						</div>
-					) : (
+					) : ( 
 						<div className="buttons-wrapper logged">
 							<Link to="/swap">
 								<Button variant={isDayMode ? 'info' : 'primary'}>Swap Now</Button>

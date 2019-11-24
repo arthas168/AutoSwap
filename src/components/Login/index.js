@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useContext } from 'react';
-import GlobalContext from "../GlobalState/globalContext";
-import InvalidUrl from "../InvalidUrl";
+import GlobalContext from '../GlobalState/globalContext';
+import InvalidUrl from '../InvalidUrl';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fire from '../../config/Fire';
 import { Button, Form } from 'react-bootstrap';
@@ -34,8 +34,7 @@ function LoginView(props) {
 		setPassword(password);
 	};
 
-	return (
-		userEmail === '' ?
+	return userEmail === '' ? (
 		<Fragment>
 			<Header />
 			<section id="login">
@@ -54,6 +53,7 @@ function LoginView(props) {
 								onChange={e => onChangeEmail(e.target.value)}
 							/>
 						</Form.Group>
+						<span className="errorMsg">test</span>
 
 						<Form.Group controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
@@ -63,16 +63,17 @@ function LoginView(props) {
 								onChange={e => onChangePass(e.target.value)}
 							/>
 						</Form.Group>
+						<span className="errorMsg">test</span>
 
-						<Button variant={isDayMode ? "info" : "primary"} type="submit" onClick={e => login(e)}>
+						<Button variant={isDayMode ? 'info' : 'primary'} type="submit" onClick={e => login(e)}>
 							Log In
 						</Button>
 					</Form>
 				</div>
 			</section>
 		</Fragment>
-		:
-		<InvalidUrl reason="userAlreadyLogged"/>
+	) : (
+		<InvalidUrl reason="userAlreadyLogged" />
 	);
 }
 

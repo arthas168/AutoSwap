@@ -45,6 +45,7 @@
 			width: 400px;
 			button {
 				margin-left: 1.5rem;
+				min-width:90px;
 			}
 			li {
 				color: #f4f8fc;
@@ -54,6 +55,7 @@
 			.toggle-mode {
 				width: 50px;
 				margin-top: -9px;
+				margin-right:15px;
 				&:hover{
 					cursor:pointer;
 				}
