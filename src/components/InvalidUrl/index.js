@@ -31,7 +31,7 @@ function index(props) {
 					props.reason==="userAlreadyLogged" ?
 					(<h1>
 						Oops! You are already logged in :( <br></br>
-						<br></br> Redirecting to home page... <Countdown date={Date.now() + 5000} renderer={renderer} />
+						<br></br> Redirecting to home page... <Countdown date={Date.now()} renderer={renderer} />
 						s
 					</h1>)
 					:

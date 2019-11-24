@@ -7,31 +7,62 @@ import { Button, Form } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import Header from '../Header/';
 import { NavLink, withRouter } from 'react-router-dom';
+import validateEmail from '../../helpers/emailValidator';
 
 function LoginView(props) {
 	const globalContext = useContext(GlobalContext);
 	const { userEmail, isDayMode } = globalContext;
 
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [emailErrorMsg, setEmailErrorMsg] = useState('');
+	const [passErrorMsg, setPassErrorMsg] = useState('');
+	const [globalErrorMsg, setGlobalErrorMsg] = useState('');
 
 	const login = e => {
 		e.preventDefault();
-		fire.auth()
-			.signInWithEmailAndPassword(email, password)
-			.then(u => {})
-			.catch(error => {
-				console.log(error);
-			});
-		props.history.push('/');
+		if (email !== '' && password !== '') {
+			if (emailErrorMsg === '' && passErrorMsg === '') {
+				fire.auth()
+					.signInWithEmailAndPassword(email, password)
+					.then(u => {})
+					.catch(error => {
+					setGlobalErrorMsg("Incorrect email or password");
+					});
+			}
+		} else {
+			if (password === '') {
+				setPassErrorMsg('Please enter a valid password!');
+			}
+			if (email === '') {
+				setEmailErrorMsg('Please enter a valid email address!');
+			}
+		}
 	};
 
-	const onChangeEmail = email => {
-		setEmail(email);
+	const onChangeEmail = newEmail => {
+		if (newEmail === '') {
+			setEmailErrorMsg('');
+			setEmail('');
+		} else {
+			if (validateEmail(newEmail)) {
+				setEmail(newEmail);
+				setEmailErrorMsg('');
+			} else {
+				setEmailErrorMsg('Incorrect email address format!');
+				setEmail('');
+			}
+		}
 	};
 
-	const onChangePass = password => {
-		setPassword(password);
+	const onChangePass = newPassword => {
+		if (newPassword !== '') {
+			setPassword(newPassword);
+			setPassErrorMsg('');
+		} else {
+			setPassErrorMsg('Please enter a valid password!');
+			setPassword('');
+		}
 	};
 
 	return userEmail === '' ? (
@@ -45,7 +76,9 @@ function LoginView(props) {
 							<span className="back">{'<'}</span>
 						</NavLink>
 						<p>Once you're logged in, you can start swapping right away!</p>
-						<Form.Group controlId="formBasicUsername">
+						<span className="error-msg">{globalErrorMsg}</span>
+
+						<Form.Group controlId="formBasicEmail">
 							<Form.Label>Email</Form.Label>
 							<Form.Control
 								type="email"
@@ -53,7 +86,7 @@ function LoginView(props) {
 								onChange={e => onChangeEmail(e.target.value)}
 							/>
 						</Form.Group>
-						<span className="errorMsg">test</span>
+						<span className="error-msg">{emailErrorMsg}</span>
 
 						<Form.Group controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
@@ -63,7 +96,7 @@ function LoginView(props) {
 								onChange={e => onChangePass(e.target.value)}
 							/>
 						</Form.Group>
-						<span className="errorMsg">test</span>
+						<span className="error-msg">{passErrorMsg}</span>
 
 						<Button variant={isDayMode ? 'info' : 'primary'} type="submit" onClick={e => login(e)}>
 							Log In

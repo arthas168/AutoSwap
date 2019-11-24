@@ -19,6 +19,8 @@ export default function RegisterView(props) {
 	const [emailErrorMsg, setEmailErrorMsg] = useState('');
 	const [passErrorMsg, setPassErrorMsg] = useState('');
 	const [repeatPassErrorMsg, setRepeatPassErrorMsg] = useState('');
+	const [globalErrorMsg, setGlobalErrorMsg] = useState('');
+
 
 	const register = e => {
 		e.preventDefault();
@@ -47,7 +49,7 @@ export default function RegisterView(props) {
 				setEmailErrorMsg('Please enter a valid email address!');
 			}
 			if (repeatPassword === '') {
-				setRepeatPassErrorMsg('Please type in your password again');
+				setRepeatPassErrorMsg('Please type in your password again!');
 			}
 		}
 	};
@@ -111,6 +113,8 @@ export default function RegisterView(props) {
 							<span className="back">{'<'}</span>
 						</NavLink>
 						<p>As soon as you register an account you can start swapping right away!</p>
+
+						<span className="error-msg">{globalErrorMsg}</span>
 
 						<Form.Group controlId="formBasicEmail">
 							<Form.Label>Email</Form.Label>
