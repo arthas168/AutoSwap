@@ -9,7 +9,7 @@ import Header from '../Header/';
 import { NavLink } from 'react-router-dom';
 import validateEmail from '../../helpers/emailValidator';
 
-export default function RegisterView(props) {
+export default function RegisterView() {
 	const globalContext = useContext(GlobalContext);
 	const { userEmail, isDayMode } = globalContext;
 
@@ -36,9 +36,8 @@ export default function RegisterView(props) {
 							console.log(u);
 						})
 						.catch(error => {
-							console.log(error);
+							setGlobalErrorMsg("Email already in use!");
 						});
-					props.history.push('/');
 				}
 			}
 		} else {

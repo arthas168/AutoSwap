@@ -9,7 +9,7 @@ import Header from '../Header/';
 import { NavLink, withRouter } from 'react-router-dom';
 import validateEmail from '../../helpers/emailValidator';
 
-function LoginView(props) {
+function LoginView() {
 	const globalContext = useContext(GlobalContext);
 	const { userEmail, isDayMode } = globalContext;
 
