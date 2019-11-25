@@ -17,6 +17,14 @@ export default function Home() {
 			<section id="home">
 				<Particles className="particles" />
 				<div className="container">
+					<div className="dashboard">
+						<span>
+							Total Autoswap Users: <span>3422</span>
+						</span>
+						<span>
+							Total Swaps: <span>48402</span>
+						</span>
+					</div>
 					<Typed
 						className="typed-text"
 						strings={['Fully Automated', 'Cross-chain', 'Lightning fast']}
@@ -37,7 +45,7 @@ export default function Home() {
 								</Button>
 							</Link>
 						</div>
-					) : ( 
+					) : (
 						<div className="buttons-wrapper logged">
 							<Link to="/swap">
 								<Button variant={isDayMode ? 'info' : 'primary'}>Swap Now</Button>

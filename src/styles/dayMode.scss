@@ -11,6 +11,20 @@ body.day {
 			color: #f4f8fc;
 			text-shadow: 1px 1px 1px #000000;
 		}
+		.dashboard {
+		
+      text-shadow: none;
+      background: none;
+      border: 1px solid #f4f8fc;
+
+			span {
+        color: #f4f8fc;
+        span{
+          color: white;
+          font-weight:bold;
+        }
+			}
+		}
 	}
 
 	#about {
