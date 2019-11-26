@@ -20,13 +20,7 @@ function index(props) {
 			<Particles className="particles" />
 			<div className="container">
 				<Spinner className="spinner" animation="border" variant="primary" />
-				{props.reason === 'userNotLogged' ? (
-					<h1>
-						Oops! Permission denied :(<br></br>
-						<br></br> Redirecting to home page... <Countdown date={Date.now() + 5000} renderer={renderer} />
-						s
-					</h1>
-				) : props.reason === 'userAlreadyLogged' ? (
+				{props.reason === 'userNotLogged' || props.reason === 'userAlreadyLogged' ? (
 					<Countdown date={Date.now()} renderer={renderer} />
 				) : (
 					<h1>
