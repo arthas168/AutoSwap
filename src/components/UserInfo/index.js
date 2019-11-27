@@ -20,7 +20,8 @@ export default function UserInfo() {
 	const [isActionDeposit, setIsActionDeposit] = useState(false);
 	const [chosenCurrency, setChosenCurrency] = useState('ETH');
 	const [isVeilOpen, setIsVeilOpen] = useState(false);
-	const [transactions, setTransactions] = useState(false);
+	const [transactions, setTransactions] = useState();
+	const [chosenTransaction, setChosenTransaction] = useState();
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
 	const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -54,9 +55,16 @@ export default function UserInfo() {
 		setIsVeilOpen(false);
 	};
 
-	const onMoreInfoBtn = () => {
+	const onMoreInfoBtn = t => {
 		setIsVeilOpen(true);
+		setChosenTransaction(t);
 	};
+
+	function toDateTime(secs) {
+		var t = new Date(1970, 0, 1); // Epoch
+		t.setSeconds(secs);
+		return t;
+	}
 
 	return userEmail !== '' ? (
 		<Fragment>
@@ -70,7 +78,7 @@ export default function UserInfo() {
 			<section id="userInfo">
 				<Particles className="particles" />
 				<div className="container">
-					{isVeilOpen ? <Transaction /> : null}
+					{isVeilOpen ? <Transaction t={chosenTransaction} /> : null}
 					<div className="main-info">
 						<h1>
 							Total Portfolio Value: <span className="green-span">20045$</span>
@@ -129,21 +137,23 @@ export default function UserInfo() {
 						<p className="history">Transaction History</p>
 						<Scrollbars className="scroller-area" style={{ width: 400, height: 450 }}>
 							{transactions ? (
-								transactions.map((t, i) => (
-									<div key={i} className="transaction-card">
-										<p>
-											Exchanged: {t.ethAmount} ETH for {t.trxAmount} TRX
-										</p>
-										<p>On date: nasko</p>
-
-										<Button
-											variant={isDayMode ? 'info' : 'primary'}
-											onClick={() => onMoreInfoBtn()}
-										>
-											More Info
-										</Button>
-									</div>
-								))
+								transactions.map((t, i) =>
+									t.userHandle === userEmail ? (
+										<div key={i} className="transaction-card">
+											<p>
+												Exchanged: <span className="green-span">{t.ethAmount}</span> ETH for{' '}
+												<span className="green-span">{t.trxAmount}</span> TRX
+											</p>
+											<p>On date: {toDateTime(t.date._seconds).toString()}</p>
+											<Button
+												variant={isDayMode ? 'info' : 'primary'}
+												onClick={() => onMoreInfoBtn(t)}
+											>
+												More Info
+											</Button>
+										</div>
+									) : null
+								)
 							) : (
 								<Spinner className="spinner" animation="border" variant="primary" />
 							)}

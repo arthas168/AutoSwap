@@ -24,9 +24,18 @@
 		display: grid;
 		.green-span {
 			color: #28a745 !important;
+			font-weight: bold;
 		}
 		.red-span {
 			color: #dc3545 !important;
+			font-weight: bold;
+		}
+
+		.spinner {
+			width: 100px;
+			height: 100px;
+			margin-top: 3rem;
+			margin-left: 8rem;
 		}
 
 		.main-info {
