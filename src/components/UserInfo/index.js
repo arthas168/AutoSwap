@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useContext } from 'react';
+import React, { useState, Fragment, useContext, useEffect } from 'react';
 import GlobalContext from '../GlobalState/globalContext';
 import InvalidUrl from '../InvalidUrl';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,17 +8,40 @@ import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import Transaction from '../Transaction';
+import { Spinner } from 'react-bootstrap';
+
+const axios = require('axios');
 
 export default function UserInfo() {
 	const globalContext = useContext(GlobalContext);
-	const { userEmail, isDayMode } = globalContext;
+	const { isDayMode, userEmail } = globalContext;
 
 	const [isActionClosed, setIsActionClosed] = useState(true);
 	const [isActionDeposit, setIsActionDeposit] = useState(false);
 	const [chosenCurrency, setChosenCurrency] = useState('ETH');
 	const [isVeilOpen, setIsVeilOpen] = useState(false);
+	const [transactions, setTransactions] = useState(false);
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
+	const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
+	useEffect(() => {
+		axios
+			.get(proxyUrl + 'https://us-central1-atomic-swap.cloudfunctions.net/getTransactions')
+			.then(response => {
+				setTransactions(Object.values(response.data));
+			})
+			.catch(function(error) {
+				if (error.response) {
+					console.log(error.response.headers);
+				} else if (error.request) {
+					console.log(error.request);
+				} else {
+					console.log(error.message);
+				}
+				console.log(error.config);
+			});
+	}, []);
 
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
 		console.log(actionStatus, ' ', isDeposit);
@@ -38,7 +61,7 @@ export default function UserInfo() {
 	return userEmail !== '' ? (
 		<Fragment>
 			<div
-				className={isVeilOpen ? "veil shown" : "veil hidden"}
+				className={isVeilOpen ? 'veil shown' : 'veil hidden'}
 				onClick={() => {
 					onVeilClose();
 				}}
@@ -105,45 +128,25 @@ export default function UserInfo() {
 					<div className="transaction-list">
 						<p className="history">Transaction History</p>
 						<Scrollbars className="scroller-area" style={{ width: 400, height: 450 }}>
-							<div className="transaction-card">
-								<p>Exchanged: X ETH for Y TRX</p>
-								<p>On date: 21-11-2019</p>
+							{transactions ? (
+								transactions.map((t, i) => (
+									<div key={i} className="transaction-card">
+										<p>
+											Exchanged: {t.ethAmount} ETH for {t.trxAmount} TRX
+										</p>
+										<p>On date: nasko</p>
 
-								<Button variant={isDayMode ? "info" : "primary"} onClick={ () => onMoreInfoBtn()}>
-									More Info
-								</Button>
-							</div>
-
-							<div className="transaction-card">
-								<p>Exchanged: X ETH for Y TRX</p>
-								<p>On date: 21-11-2019</p>
-
-								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
-							</div>
-							<div className="transaction-card">
-								<p>Exchanged: X ETH for Y TRX</p>
-								<p>On date: 21-11-2019</p>
-
-								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
-							</div>
-							<div className="transaction-card">
-								<p>Exchanged: X ETH for Y TRX</p>
-								<p>On date: 21-11-2019</p>
-
-								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
-							</div>
-							<div className="transaction-card">
-								<p>Exchanged: X ETH for Y TRX</p>
-								<p>On date: 21-11-2019</p>
-
-								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
-							</div>
-							<div className="transaction-card">
-								<p>Exchanged: X ETH for Y TRX</p>
-								<p>On date: 21-11-2019</p>
-
-								<Button variant={isDayMode ? "info" : "primary"}>More Info</Button>
-							</div>
+										<Button
+											variant={isDayMode ? 'info' : 'primary'}
+											onClick={() => onMoreInfoBtn()}
+										>
+											More Info
+										</Button>
+									</div>
+								))
+							) : (
+								<Spinner className="spinner" animation="border" variant="primary" />
+							)}
 						</Scrollbars>
 					</div>
 				</div>

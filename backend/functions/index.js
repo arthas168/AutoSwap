@@ -38,7 +38,6 @@ exports.createTransaction = functions.https.onRequest((req, res) => {
 		trxAmount: req.body.trxAmount,
 		trxPrice: req.body.trxPrice,
 		txHash: req.body.txHash,
-		userHandle: req.body.userHandle,
 	};
 	admin
 		.firestore()
