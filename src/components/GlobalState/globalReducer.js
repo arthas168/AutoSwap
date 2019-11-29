@@ -1,8 +1,6 @@
 import { USER_AUTH, TOGGLE_MODE, UPDATE_BALANCE } from './types';
 
 export default (state, action) => {
-	console.log(action);
-
 	switch (action.type) {
 		case USER_AUTH:
 			return {

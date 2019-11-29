@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GlobalContext from '../GlobalState/globalContext';
 import { Button } from 'react-bootstrap';
@@ -7,24 +7,30 @@ import Typed from 'react-typed';
 import Header from '../Header/';
 import Footer from '../Footer';
 import { Link } from 'react-router-dom';
+import { getTransactions } from '../../helpers/firebaseFns';
 
 export default function Home() {
 	const globalContext = useContext(GlobalContext);
 	const { userEmail, isDayMode } = globalContext;
+	const [transactions, setTransactions] = useState();
+
+	useEffect(() => {
+		getTransactions(setTransactions);
+	}, []);
+
 	return (
 		<Fragment>
 			<Header />
 			<section id="home">
 				<Particles className="particles" />
 				<div className="container">
-					<div className="dashboard">
-						<span>
-							Total Autoswap Users: <span>3422</span>
-						</span>
-						<span>
-							Total Swaps: <span>48402</span>
-						</span>
-					</div>
+					{transactions ? (
+						<div className="dashboard heartbeat">
+							<span>
+								Total AutoSwaps: <span>{transactions.length}</span>
+							</span>
+						</div>
+					) : null}
 					<Typed
 						className="typed-text"
 						strings={['Fully Automated', 'Cross-chain', 'Lightning fast']}
