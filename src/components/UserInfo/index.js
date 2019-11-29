@@ -9,8 +9,8 @@ import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import Transaction from '../Transaction';
 import { Spinner } from 'react-bootstrap';
-import { updateBalance, getTransactions } from '../../helpers/firebaseFns';
-import { toDateTime } from '../../helpers/helperFns';
+import { updateBalance, getBalance, getTransactions } from '../../helpers/firebaseFns';
+import { toDateTime, getPriceToUSD } from '../../helpers/helperFns';
 
 export default function UserInfo() {
 	const globalContext = useContext(GlobalContext);
@@ -23,11 +23,15 @@ export default function UserInfo() {
 	const [transactions, setTransactions] = useState();
 	const [chosenTransaction, setChosenTransaction] = useState();
 	const [amount, setAmount] = useState();
+	const [balance, setBalance] = useState();
+
+	console.log(balance);
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
 
 	useEffect(() => {
 		getTransactions(setTransactions);
+		getBalance(setBalance);
 	}, []);
 
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
@@ -68,35 +72,38 @@ export default function UserInfo() {
 				<div className="container">
 					{isVeilOpen ? <Transaction t={chosenTransaction} /> : null}
 					<div className="main-info">
-						<h1>
-							Total Portfolio Value: <span className="green-span">20045$</span>
-						</h1>
-						<div className="currencies-list">
-							<div className="eth info-group">
-								<p>ETH (ETHEREUM) - 2.5</p>
-								<p className="green-span">786$</p>
-								<div className="buttons">
-									<Button onClick={() => onBtnClick(false, true, 'ETH')} variant="success">
-										Deposit
-									</Button>
-									<Button onClick={() => onBtnClick(false, false, 'ETH')} variant="danger">
-										Withdraw
-									</Button>
+						<h1>Total Portfolio Value: {balance ? <span className="green-span">20045$</span> : null}</h1>
+
+						{balance ? (
+							<div className="currencies-list">
+								<div className="eth info-group">
+									<p>ETH (ETHEREUM) - {balance.eth}</p>
+									<p className="green-span">786$</p>
+									<div className="buttons">
+										<Button onClick={() => onBtnClick(false, true, 'ETH')} variant="success">
+											Deposit
+										</Button>
+										<Button onClick={() => onBtnClick(false, false, 'ETH')} variant="danger">
+											Withdraw
+										</Button>
+									</div>
+								</div>
+								<div className="trx info-group">
+									<p>TRON (TRX) - {balance.trx}</p>
+									<p className="green-span">20$</p>
+									<div className="buttons">
+										<Button onClick={() => onBtnClick(false, true, 'TRX')} variant="success">
+											Deposit
+										</Button>
+										<Button onClick={() => onBtnClick(false, false, 'TRX')} variant="danger">
+											Withdraw
+										</Button>
+									</div>
 								</div>
 							</div>
-							<div className="trx info-group">
-								<p>TRON (TRX) - 12243</p>
-								<p className="green-span">20$</p>
-								<div className="buttons">
-									<Button onClick={() => onBtnClick(false, true, 'TRX')} variant="success">
-										Deposit
-									</Button>
-									<Button onClick={() => onBtnClick(false, false, 'TRX')} variant="danger">
-										Withdraw
-									</Button>
-								</div>
-							</div>
-						</div>
+						) : (
+							<Spinner className="spinner currencies" animation="border" variant="primary" />
+						)}
 						<div className={'action ' + actionIsOpenClass}>
 							<span className="closer" onClick={() => setIsActionClosed(true)}>
 								X

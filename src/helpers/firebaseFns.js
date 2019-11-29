@@ -1,8 +1,27 @@
 import { getRandomTime, generateSalt, getPriceToUSD } from './helperFns';
+import { sumBalance } from './helperFns';
 
 const axios = require('axios');
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const sha256 = require('js-sha256');
+
+export const getBalance = setBalance => {
+	axios
+		.get(proxyUrl + 'https://us-central1-atomic-swap.cloudfunctions.net/getBalance')
+		.then(response => {
+			setBalance(sumBalance(Object.values(response.data)));
+		})
+		.catch(function(error) {
+			if (error.response) {
+				console.log(error.response.headers);
+			} else if (error.request) {
+				console.log(error.request);
+			} else {
+				console.log(error.message);
+			}
+			console.log(error.config);
+		});
+};
 
 export const updateBalance = (email, isDeposit, currency, amount) => {
 	axios
@@ -10,7 +29,7 @@ export const updateBalance = (email, isDeposit, currency, amount) => {
 			userHandle: email,
 			type: isDeposit ? 'deposit' : 'withdraw',
 			currency: currency,
-			amount: amount,
+			amount: parseInt(amount),
 		})
 		.then(function(response) {
 			// console.log(response);
