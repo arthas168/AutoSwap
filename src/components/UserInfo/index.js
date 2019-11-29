@@ -14,7 +14,7 @@ import { Spinner } from 'react-bootstrap';
 import { updateBalance, getBalance, getTransactions } from '../../helpers/firebaseFns';
 import { toDateTime } from '../../helpers/helperFns';
 
-export default function UserInfo() {
+export default function UserInfo(props) {
 	const globalContext = useContext(GlobalContext);
 	const swapContext = useContext(SwapContext);
 
@@ -52,9 +52,9 @@ export default function UserInfo() {
 	};
 
 	const onBalanceChange = (userEmail, isActionDeposit, chosenCurrency, amount) => {
-		//TODO: validations
 		updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 		setIsActionClosed(true);
+		props.history.push('/');
 	};
 
 	const onAmountChange = e => {

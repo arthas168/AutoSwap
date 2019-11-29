@@ -13,8 +13,9 @@ import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import { Spinner } from 'react-bootstrap';
 import { createTransaction, updateBalance, getBalance } from '../../helpers/firebaseFns';
+import Countdown from 'react-countdown-now';
 
-export default function Swap() {
+export default function Swap(props) {
 	const globalContext = useContext(GlobalContext);
 	const { userEmail, isDayMode, balance, onUpdateBalance } = globalContext;
 	const [isSwapSubmitted, setIsSwapSubmitted] = useState(false);
@@ -23,6 +24,15 @@ export default function Swap() {
 	useEffect(() => {
 		getBalance(onUpdateBalance, userEmail);
 	}, []);
+
+	const renderer = ({ seconds, completed }) => {
+		if (completed) {
+			props.history.push('/user');
+			return null;
+		} else {
+			return <span>{seconds}</span>;
+		}
+	};
 
 	const swapContext = useContext(SwapContext);
 	const {
@@ -150,7 +160,10 @@ export default function Swap() {
 							</Button>
 						</div>
 					) : (
-						<Spinner className="spinner" animation="border" variant="primary" />
+						<Fragment>
+							<Spinner className="spinner" animation="border" variant="primary" />
+							<Countdown date={Date.now() + 2000} renderer={renderer} />
+						</Fragment>
 					)}
 				</div>
 			</section>
