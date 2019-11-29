@@ -10,6 +10,7 @@ const GlobalState = props => {
 		isDayMode: false,
 		balance: {},
 	};
+
 	const [state, dispatch] = useReducer(GlobalReducer, initialState);
 	if (state.isDayMode) {
 		document.body.classList.remove('night');

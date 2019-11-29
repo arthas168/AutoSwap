@@ -12,11 +12,11 @@ import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import { Spinner } from 'react-bootstrap';
-import { createTransaction } from '../../helpers/firebaseFns';
+import { createTransaction, updateBalance } from '../../helpers/firebaseFns';
 
 export default function Swap() {
 	const globalContext = useContext(GlobalContext);
-	const { userEmail, isDayMode } = globalContext;
+	const { userEmail, isDayMode, balance } = globalContext;
 	const [isSwapSubmitted, setIsSwapSubmitted] = useState(false);
 
 	const swapContext = useContext(SwapContext);
@@ -44,9 +44,21 @@ export default function Swap() {
 
 	const onSwapSubmit = e => {
 		e.preventDefault();
-		
-		setIsSwapSubmitted(true);
-		createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
+		if (firstCurrency.value === 'trx') {
+			if (balance.trx >= firstAmount) {
+				setIsSwapSubmitted(true);
+				createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
+				updateBalance(userEmail, false, 'TRX', firstAmount);
+				updateBalance(userEmail, true, 'ETH', secondAmount);
+			}
+		} else {
+			if (balance.eth >= firstAmount) {
+				setIsSwapSubmitted(true);
+				createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
+				updateBalance(userEmail, false, 'ETH', firstAmount);
+				updateBalance(userEmail, true, 'TRX', secondAmount);
+			}
+		}
 	};
 
 	return userEmail !== '' ? (

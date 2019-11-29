@@ -29,7 +29,7 @@ export const updateBalance = (email, isDeposit, currency, amount) => {
 			userHandle: email,
 			type: isDeposit ? 'deposit' : 'withdraw',
 			currency: currency,
-			amount: parseInt(amount),
+			amount: parseFloat(amount),
 		})
 		.then(function(response) {
 			// console.log(response);

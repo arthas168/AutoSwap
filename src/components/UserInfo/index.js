@@ -21,6 +21,7 @@ export default function UserInfo() {
 	const { isDayMode, userEmail, balance, onUpdateBalance } = globalContext;
 	const { prices } = swapContext;
 
+
 	const [isActionClosed, setIsActionClosed] = useState(true);
 	const [isActionDeposit, setIsActionDeposit] = useState(false);
 	const [chosenCurrency, setChosenCurrency] = useState('ETH');
@@ -88,7 +89,7 @@ export default function UserInfo() {
 							{balance ? <span className="green-span">{formatBalance()}$</span> : null}
 						</h1>
 
-						{balance ? (
+						{balance !== {} ? (
 							<div className="currencies-list">
 								<div className="eth info-group">
 									<p>ETH (ETHEREUM) - {balance.eth}</p>
@@ -104,7 +105,7 @@ export default function UserInfo() {
 								</div>
 								<div className="trx info-group">
 									<p>TRON (TRX) - {balance.trx}</p>
-									<p className="green-span">{balance.eth * prices['TRX']['USDT']}$</p>
+									<p className="green-span">{balance.trx * prices['TRX']['USDT']}$</p>
 									<div className="buttons">
 										<Button onClick={() => onBtnClick(false, true, 'TRX')} variant="success">
 											Deposit
