@@ -34,7 +34,7 @@ export default function UserInfo() {
 
 	useEffect(() => {
 		getTransactions(setTransactions);
-		getBalance(setBalance);
+		getBalance(setBalance, userEmail);
 	}, []);
 
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
@@ -63,6 +63,10 @@ export default function UserInfo() {
 
 	const formatBalance = () => {
 		return (balance.eth * prices['ETH']['USDT'] + balance.eth * prices['TRX']['USDT']).toFixed(2);
+	};
+
+	const filterTransactions = a => {
+		return a.filter(b => b.userHandle === userEmail);
 	};
 
 	return userEmail !== '' ? (
@@ -147,7 +151,7 @@ export default function UserInfo() {
 						<p className="history">Transaction History</p>
 						<Scrollbars className="scroller-area" style={{ width: 400, height: 450 }}>
 							{transactions ? (
-								transactions.map((t, i) =>
+								filterTransactions(transactions).map((t, i) =>
 									t.userHandle === userEmail ? (
 										<div key={i} className="transaction-card">
 											<p>

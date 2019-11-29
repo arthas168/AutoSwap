@@ -35,11 +35,19 @@ export const getRandomTime = () => {
 	return res;
 };
 
-export const sumBalance = rawBalance => {
-	const ethDeposits = rawBalance.filter(b => b.type === 'deposit' && b.currency === 'ETH');
-	const ethWithdraws = rawBalance.filter(b => b.type === 'withdraw' && b.currency === 'ETH');
-	const trxDeposits = rawBalance.filter(b => b.type === 'deposit' && b.currency === 'TRX');
-	const trxWithdraws = rawBalance.filter(b => b.type === 'withdraw' && b.currency === 'TRX');
+export const sumBalance = (rawBalance, userEmail) => {
+	const ethDeposits = rawBalance.filter(
+		b => b.type === 'deposit' && b.currency === 'ETH' && b.userHandle === userEmail
+	);
+	const ethWithdraws = rawBalance.filter(
+		b => b.type === 'withdraw' && b.currency === 'ETH' && b.userHandle === userEmail
+	);
+	const trxDeposits = rawBalance.filter(
+		b => b.type === 'deposit' && b.currency === 'TRX' && b.userHandle === userEmail
+	);
+	const trxWithdraws = rawBalance.filter(
+		b => b.type === 'withdraw' && b.currency === 'TRX' && b.userHandle === userEmail
+	);
 	const ethDepositSum = ethDeposits.reduce((acc, val) => {
 		return acc + val.amount;
 	}, 0);

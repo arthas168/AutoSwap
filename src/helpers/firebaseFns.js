@@ -5,11 +5,11 @@ const axios = require('axios');
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const sha256 = require('js-sha256');
 
-export const getBalance = setBalance => {
+export const getBalance = (setBalance, userEmail) => {
 	axios
 		.get(proxyUrl + 'https://us-central1-atomic-swap.cloudfunctions.net/getBalance')
 		.then(response => {
-			setBalance(sumBalance(Object.values(response.data)));
+			setBalance(sumBalance(Object.values(response.data), userEmail));
 		})
 		.catch(function(error) {
 			if (error.response) {
