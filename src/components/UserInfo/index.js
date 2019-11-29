@@ -28,6 +28,7 @@ export default function UserInfo(props) {
 	const [transactions, setTransactions] = useState();
 	const [chosenTransaction, setChosenTransaction] = useState();
 	const [amount, setAmount] = useState();
+	const [error, setError] = useState();
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
 
@@ -52,9 +53,27 @@ export default function UserInfo(props) {
 	};
 
 	const onBalanceChange = (userEmail, isActionDeposit, chosenCurrency, amount) => {
-		updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
-		setIsActionClosed(true);
-		props.history.push('/');
+		if (amount <= 0) {
+			setError('Amount has to be positive number!');
+		} else {
+			if (chosenCurrency === 'ETH') {
+				if (!isActionDeposit && amount > balance.eth) {
+					setError("Can't withdraw more than you have!");
+				} else {
+					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
+					setIsActionClosed(true);
+					props.history.push('/');
+				}
+			} else {
+				if (!isActionDeposit && amount > balance.trx) {
+					setError("Can't withdraw more than you have!");
+				} else {
+					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
+					setIsActionClosed(true);
+					props.history.push('/');
+				}
+			}
+		}
 	};
 
 	const onAmountChange = e => {
@@ -145,6 +164,7 @@ export default function UserInfo(props) {
 									</Button>
 								</InputGroup.Append>
 							</InputGroup>
+							<span className="error">{error}</span>
 						</div>
 					</div>
 					<div className="transaction-list">

@@ -31,13 +31,18 @@
 			font-weight: bold;
 		}
 
+		.error {
+			color: red;
+			text-shadow: none;
+		}
+
 		.spinner {
 			width: 100px;
 			height: 100px;
 			margin-top: 3rem;
 			margin-left: 8rem;
-			&.currencies{
-				margin-right:8rem;
+			&.currencies {
+				margin-right: 8rem;
 			}
 		}
 
