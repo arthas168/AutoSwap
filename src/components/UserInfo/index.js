@@ -21,7 +21,6 @@ export default function UserInfo() {
 	const { isDayMode, userEmail, balance, onUpdateBalance } = globalContext;
 	const { prices } = swapContext;
 
-
 	const [isActionClosed, setIsActionClosed] = useState(true);
 	const [isActionDeposit, setIsActionDeposit] = useState(false);
 	const [chosenCurrency, setChosenCurrency] = useState('ETH');

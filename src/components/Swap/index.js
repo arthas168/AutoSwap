@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useState } from 'react';
+import React, { useContext, Fragment, useState, useEffect } from 'react';
 import SwapContext from './swapContext';
 import GlobalContext from '../GlobalState/globalContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,12 +12,17 @@ import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import { Spinner } from 'react-bootstrap';
-import { createTransaction, updateBalance } from '../../helpers/firebaseFns';
+import { createTransaction, updateBalance, getBalance } from '../../helpers/firebaseFns';
 
 export default function Swap() {
 	const globalContext = useContext(GlobalContext);
-	const { userEmail, isDayMode, balance } = globalContext;
+	const { userEmail, isDayMode, balance, onUpdateBalance } = globalContext;
 	const [isSwapSubmitted, setIsSwapSubmitted] = useState(false);
+	const [error, setError] = useState('');
+
+	useEffect(() => {
+		getBalance(onUpdateBalance, userEmail);
+	}, []);
 
 	const swapContext = useContext(SwapContext);
 	const {
@@ -43,20 +48,41 @@ export default function Swap() {
 	};
 
 	const onSwapSubmit = e => {
+		console.log(firstAmount);
 		e.preventDefault();
 		if (firstCurrency.value === 'trx') {
 			if (balance.trx >= firstAmount) {
-				setIsSwapSubmitted(true);
-				createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
-				updateBalance(userEmail, false, 'TRX', firstAmount);
-				updateBalance(userEmail, true, 'ETH', secondAmount);
+				if (firstAmount === 0 || firstAmount === '') {
+					setError('Amount cannot be 0!');
+				} else {
+					if (firstCurrency.value === secondCurrency.value) {
+						setError('First and seccond currency cannot be the same!');
+					} else {
+						setIsSwapSubmitted(true);
+						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
+						updateBalance(userEmail, false, 'TRX', firstAmount);
+						updateBalance(userEmail, true, 'ETH', secondAmount);
+					}
+				}
+			} else {
+				setError(`Amount cannot be more than ${balance.trx}TRX!`);
 			}
 		} else {
 			if (balance.eth >= firstAmount) {
-				setIsSwapSubmitted(true);
-				createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
-				updateBalance(userEmail, false, 'ETH', firstAmount);
-				updateBalance(userEmail, true, 'TRX', secondAmount);
+				if (firstAmount === 0 || firstAmount === '') {
+					setError('Amount cannot be 0!');
+				} else {
+					if (firstCurrency.value === secondCurrency.value) {
+						setError('First and seccond currency cannot be the same!');
+					} else {
+						setIsSwapSubmitted(true);
+						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
+						updateBalance(userEmail, false, 'ETH', firstAmount);
+						updateBalance(userEmail, true, 'TRX', secondAmount);
+					}
+				}
+			} else {
+				setError(`Amount cannot be more than ${balance.eth}ETH!`);
 			}
 		}
 	};
@@ -91,7 +117,7 @@ export default function Swap() {
 									}}
 								/>
 							</InputGroup>
-
+							<span>{error}</span>
 							<InputGroup className="mb-3">
 								<Select
 									styles={customSelectStyles()}
