@@ -1,5 +1,7 @@
 import React, { useState, Fragment, useContext, useEffect } from 'react';
 import GlobalContext from '../GlobalState/globalContext';
+import SwapContext from '../Swap/swapContext';
+
 import InvalidUrl from '../InvalidUrl';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
@@ -10,11 +12,14 @@ import Particles from 'react-particles-js';
 import Transaction from '../Transaction';
 import { Spinner } from 'react-bootstrap';
 import { updateBalance, getBalance, getTransactions } from '../../helpers/firebaseFns';
-import { toDateTime, getPriceToUSD } from '../../helpers/helperFns';
+import { toDateTime } from '../../helpers/helperFns';
 
 export default function UserInfo() {
 	const globalContext = useContext(GlobalContext);
+	const swapContext = useContext(SwapContext);
+
 	const { isDayMode, userEmail } = globalContext;
+	const { prices } = swapContext;
 
 	const [isActionClosed, setIsActionClosed] = useState(true);
 	const [isActionDeposit, setIsActionDeposit] = useState(false);
@@ -24,8 +29,6 @@ export default function UserInfo() {
 	const [chosenTransaction, setChosenTransaction] = useState();
 	const [amount, setAmount] = useState();
 	const [balance, setBalance] = useState();
-
-	console.log(balance);
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
 
@@ -58,6 +61,10 @@ export default function UserInfo() {
 		setAmount(e.target.value);
 	};
 
+	const formatBalance = () => {
+		return (balance.eth * prices['ETH']['USDT'] + balance.eth * prices['TRX']['USDT']).toFixed(2);
+	};
+
 	return userEmail !== '' ? (
 		<Fragment>
 			<div
@@ -72,13 +79,16 @@ export default function UserInfo() {
 				<div className="container">
 					{isVeilOpen ? <Transaction t={chosenTransaction} /> : null}
 					<div className="main-info">
-						<h1>Total Portfolio Value: {balance ? <span className="green-span">20045$</span> : null}</h1>
+						<h1>
+							Total Portfolio Value:{' '}
+							{balance ? <span className="green-span">{formatBalance()}$</span> : null}
+						</h1>
 
 						{balance ? (
 							<div className="currencies-list">
 								<div className="eth info-group">
 									<p>ETH (ETHEREUM) - {balance.eth}</p>
-									<p className="green-span">786$</p>
+									<p className="green-span">{balance.eth * prices['ETH']['USDT']}$</p>
 									<div className="buttons">
 										<Button onClick={() => onBtnClick(false, true, 'ETH')} variant="success">
 											Deposit
@@ -90,7 +100,7 @@ export default function UserInfo() {
 								</div>
 								<div className="trx info-group">
 									<p>TRON (TRX) - {balance.trx}</p>
-									<p className="green-span">20$</p>
+									<p className="green-span">{balance.eth * prices['TRX']['USDT']}$</p>
 									<div className="buttons">
 										<Button onClick={() => onBtnClick(false, true, 'TRX')} variant="success">
 											Deposit

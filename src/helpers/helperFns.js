@@ -35,7 +35,7 @@ export const getRandomTime = () => {
 	return res;
 };
 
-export const sumBalance =  rawBalance => {
+export const sumBalance = rawBalance => {
 	const ethDeposits = rawBalance.filter(b => b.type === 'deposit' && b.currency === 'ETH');
 	const ethWithdraws = rawBalance.filter(b => b.type === 'withdraw' && b.currency === 'ETH');
 	const trxDeposits = rawBalance.filter(b => b.type === 'deposit' && b.currency === 'TRX');
@@ -54,7 +54,6 @@ export const sumBalance =  rawBalance => {
 	}, 0);
 
 	let ethBalance = ethDepositSum - ethWithdrawSum;
-
 	let trxBalance = trxDepositSum - trxWithdrawSum;
 
 	return {
