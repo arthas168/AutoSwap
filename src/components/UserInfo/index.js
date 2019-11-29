@@ -22,6 +22,7 @@ export default function UserInfo() {
 	const [isVeilOpen, setIsVeilOpen] = useState(false);
 	const [transactions, setTransactions] = useState();
 	const [chosenTransaction, setChosenTransaction] = useState();
+	const [amount, setAmount] = useState();
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
 	const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -44,6 +45,22 @@ export default function UserInfo() {
 			});
 	}, []);
 
+	const updateBalance = () => {
+		axios
+			.post(proxyUrl + 'https://us-central1-atomic-swap.cloudfunctions.net/postBalance', {
+				userHandle: userEmail,
+				type: isActionDeposit ? 'deposit' : 'withdraw',
+				currency: chosenCurrency,
+				amount: amount,
+			})
+			.then(function(response) {
+				// console.log(response);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+	};
+
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
 		console.log(actionStatus, ' ', isDeposit);
 		setIsActionClosed(actionStatus);
@@ -58,6 +75,14 @@ export default function UserInfo() {
 	const onMoreInfoBtn = t => {
 		setIsVeilOpen(true);
 		setChosenTransaction(t);
+	};
+
+	const onBalanceChange = () => {
+		updateBalance();
+	};
+
+	const onAmountChange = e => {
+		setAmount(e.target.value);
 	};
 
 	function toDateTime(secs) {
@@ -124,9 +149,12 @@ export default function UserInfo() {
 								?
 							</p>
 							<InputGroup className="mb-3">
-								<FormControl aria-describedby="basic-addon1" />
+								<FormControl onChange={e => onAmountChange(e)} aria-describedby="basic-addon1" />
 								<InputGroup.Append>
-									<Button variant={isActionDeposit ? 'success' : 'danger'}>
+									<Button
+										onClick={() => onBalanceChange()}
+										variant={isActionDeposit ? 'success' : 'danger'}
+									>
 										{isActionDeposit ? 'Deposit' : 'Withdraw'}
 									</Button>
 								</InputGroup.Append>

@@ -51,3 +51,43 @@ exports.createTransaction = functions.https.onRequest((req, res) => {
 			console.error(err);
 		});
 });
+
+exports.getBalance = functions.https.onRequest((req, res) => {
+	admin
+		.firestore()
+		.collection('balance')
+		.get()
+		.then(data => {
+			let transactions = [];
+			data.forEach(doc => {
+				transactions.push(doc.data());
+			});
+			return res.json(transactions);
+		})
+		.catch(err => {
+			console.log(err);
+		});
+});
+
+exports.postBalance = functions.https.onRequest((req, res) => {
+	if (req.method !== 'POST') {
+		return res.status(400).json({ error: 'Method not allowerd' });
+	}
+	const newBalance = {
+		userHandle: req.body.userHandle,
+		amount: req.body.amount,
+		currency: req.body.currency,
+		type: req.body.type,
+	};
+	admin
+		.firestore()
+		.collection('balance')
+		.add(newBalance)
+		.then(doc => {
+			res.json({ message: `document ${doc.id} created successfully` });
+		})
+		.catch(err => {
+			res.status(500).json({ error: 'something went wrong' });
+			console.error(err);
+		});
+});
