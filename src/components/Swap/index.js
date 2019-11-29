@@ -44,6 +44,7 @@ export default function Swap() {
 
 	const onSwapSubmit = e => {
 		e.preventDefault();
+		
 		setIsSwapSubmitted(true);
 		createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 	};

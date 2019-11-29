@@ -18,7 +18,7 @@ export default function UserInfo() {
 	const globalContext = useContext(GlobalContext);
 	const swapContext = useContext(SwapContext);
 
-	const { isDayMode, userEmail } = globalContext;
+	const { isDayMode, userEmail, balance, onUpdateBalance } = globalContext;
 	const { prices } = swapContext;
 
 	const [isActionClosed, setIsActionClosed] = useState(true);
@@ -28,13 +28,12 @@ export default function UserInfo() {
 	const [transactions, setTransactions] = useState();
 	const [chosenTransaction, setChosenTransaction] = useState();
 	const [amount, setAmount] = useState();
-	const [balance, setBalance] = useState();
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
 
 	useEffect(() => {
 		getTransactions(setTransactions);
-		getBalance(setBalance, userEmail);
+		getBalance(onUpdateBalance, userEmail);
 	}, []);
 
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
