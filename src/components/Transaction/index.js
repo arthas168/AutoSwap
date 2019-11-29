@@ -1,11 +1,7 @@
 import React from 'react';
+import { toDateTime } from '../../helpers/helperFns';
 
 export default function index(props) {
-	function toDateTime(secs) {
-		var t = new Date(1970, 0, 1); // Epoch
-		t.setSeconds(secs);
-		return t;
-	}
 	const t = props.t;
 	console.log(t);
 	return (

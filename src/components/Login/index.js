@@ -7,7 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import Header from '../Header/';
 import { NavLink, withRouter } from 'react-router-dom';
-import validateEmail from '../../helpers/emailValidator';
+import { validateEmail } from '../../helpers/helperFns';
 
 function LoginView() {
 	const globalContext = useContext(GlobalContext);
@@ -27,7 +27,7 @@ function LoginView() {
 					.signInWithEmailAndPassword(email, password)
 					.then(u => {})
 					.catch(error => {
-					setGlobalErrorMsg("Incorrect email or password");
+						setGlobalErrorMsg('Incorrect email or password');
 					});
 			}
 		} else {

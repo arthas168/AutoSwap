@@ -1,5 +1,4 @@
 import React, { useContext, Fragment, useState } from 'react';
-import axios from 'axios';
 import SwapContext from './swapContext';
 import GlobalContext from '../GlobalState/globalContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,7 +12,7 @@ import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import { Spinner } from 'react-bootstrap';
-var sha256 = require('js-sha256');
+import { createTransaction } from '../../helpers/firebaseFns';
 
 export default function Swap() {
 	const globalContext = useContext(GlobalContext);
@@ -43,55 +42,10 @@ export default function Swap() {
 		}
 	};
 
-	const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-
-	function getRandomTime() {
-		let randMin = Math.floor(Math.random() * Math.floor(1));
-		let randSec1 = Math.floor(Math.random() * Math.floor(5));
-		let randSec2 = Math.floor(Math.random() * Math.floor(9));
-
-		const res = '0' + randMin + ':' + randSec1 + randSec2;
-		return res;
-	}
-
-	function generateSalt() {
-		var result = '';
-		var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-		var charactersLength = characters.length;
-		for (var i = 0; i < 10; i++) {
-			result += characters.charAt(Math.floor(Math.random() * charactersLength));
-		}
-		return result;
-	}
-
-	async function getPriceToUSDT(currency) {
-		const res = await axios.get('https://spacejelly.network/price/');
-		return res.data[currency]['USDT'];
-	}
-	
-	const pushToFirebase = async () => {
-		axios
-			.post(proxyUrl + 'https://us-central1-atomic-swap.cloudfunctions.net/createTransaction', {
-				userHandle: userEmail,
-				ethAmount: firstCurrency.value === 'eth' ? firstAmount : secondAmount,
-				ethPrice: await getPriceToUSDT('ETH'),
-				execTime: getRandomTime(),
-				trxAmount: secondCurrency.value === 'trx' ? secondAmount : firstAmount,
-				trxPrice: await getPriceToUSDT('TRX'),
-				txHash: sha256(userEmail + generateSalt()),
-			})
-			.then(function(response) {
-				//console.log(response);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-	};
-
 	const onSwapSubmit = e => {
 		e.preventDefault();
 		setIsSwapSubmitted(true);
-		pushToFirebase();
+		createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 	};
 
 	return userEmail !== '' ? (

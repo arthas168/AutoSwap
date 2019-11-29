@@ -7,7 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import Header from '../Header/';
 import { NavLink } from 'react-router-dom';
-import validateEmail from '../../helpers/emailValidator';
+import { validateEmail } from '../../helpers/helperFns';
 
 export default function RegisterView() {
 	const globalContext = useContext(GlobalContext);
@@ -20,7 +20,6 @@ export default function RegisterView() {
 	const [passErrorMsg, setPassErrorMsg] = useState('');
 	const [repeatPassErrorMsg, setRepeatPassErrorMsg] = useState('');
 	const [globalErrorMsg, setGlobalErrorMsg] = useState('');
-
 
 	const register = e => {
 		e.preventDefault();
@@ -36,7 +35,7 @@ export default function RegisterView() {
 							console.log(u);
 						})
 						.catch(error => {
-							setGlobalErrorMsg("Email already in use!");
+							setGlobalErrorMsg('Email already in use!');
 						});
 				}
 			}

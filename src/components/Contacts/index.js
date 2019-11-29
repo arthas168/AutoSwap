@@ -5,7 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
-import validateEmail from '../../helpers/emailValidator';
+import { validateEmail } from '../../helpers/helperFns';
 
 export default function Contacts() {
 	const globalContext = useContext(GlobalContext);

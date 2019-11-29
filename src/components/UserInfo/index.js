@@ -9,8 +9,8 @@ import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import Transaction from '../Transaction';
 import { Spinner } from 'react-bootstrap';
-
-const axios = require('axios');
+import { updateBalance, getTransactions } from '../../helpers/firebaseFns';
+import { toDateTime } from '../../helpers/helperFns';
 
 export default function UserInfo() {
 	const globalContext = useContext(GlobalContext);
@@ -25,44 +25,12 @@ export default function UserInfo() {
 	const [amount, setAmount] = useState();
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
-	const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
 	useEffect(() => {
-		axios
-			.get(proxyUrl + 'https://us-central1-atomic-swap.cloudfunctions.net/getTransactions')
-			.then(response => {
-				setTransactions(Object.values(response.data));
-			})
-			.catch(function(error) {
-				if (error.response) {
-					console.log(error.response.headers);
-				} else if (error.request) {
-					console.log(error.request);
-				} else {
-					console.log(error.message);
-				}
-				console.log(error.config);
-			});
+		getTransactions(setTransactions);
 	}, []);
 
-	const updateBalance = () => {
-		axios
-			.post(proxyUrl + 'https://us-central1-atomic-swap.cloudfunctions.net/postBalance', {
-				userHandle: userEmail,
-				type: isActionDeposit ? 'deposit' : 'withdraw',
-				currency: chosenCurrency,
-				amount: amount,
-			})
-			.then(function(response) {
-				// console.log(response);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-	};
-
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
-		console.log(actionStatus, ' ', isDeposit);
 		setIsActionClosed(actionStatus);
 		setIsActionDeposit(isDeposit);
 		setChosenCurrency(currency);
@@ -77,19 +45,14 @@ export default function UserInfo() {
 		setChosenTransaction(t);
 	};
 
-	const onBalanceChange = () => {
-		updateBalance();
+	const onBalanceChange = (userEmail, isActionDeposit, chosenCurrency, amount) => {
+		//TODO: validations
+		updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 	};
 
 	const onAmountChange = e => {
 		setAmount(e.target.value);
 	};
-
-	function toDateTime(secs) {
-		var t = new Date(1970, 0, 1); // Epoch
-		t.setSeconds(secs);
-		return t;
-	}
 
 	return userEmail !== '' ? (
 		<Fragment>
@@ -152,7 +115,9 @@ export default function UserInfo() {
 								<FormControl onChange={e => onAmountChange(e)} aria-describedby="basic-addon1" />
 								<InputGroup.Append>
 									<Button
-										onClick={() => onBalanceChange()}
+										onClick={() =>
+											onBalanceChange(userEmail, isActionDeposit, chosenCurrency, amount)
+										}
 										variant={isActionDeposit ? 'success' : 'danger'}
 									>
 										{isActionDeposit ? 'Deposit' : 'Withdraw'}
