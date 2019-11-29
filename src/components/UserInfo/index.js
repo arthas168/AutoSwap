@@ -55,6 +55,7 @@ export default function UserInfo() {
 	const onBalanceChange = (userEmail, isActionDeposit, chosenCurrency, amount) => {
 		//TODO: validations
 		updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
+		setIsActionClosed(true);
 	};
 
 	const onAmountChange = e => {
