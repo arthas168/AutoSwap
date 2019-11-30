@@ -13,18 +13,16 @@ export default function About() {
 				<div className="container">
 					<div className="text-info">
 						<p>
-							<span>Why?</span> <br></br>Lorem ut qui nostrud cupidatat incididunt dolor nulla consequat
-							est mollit non cupidatat enima. Esse proident consequat id sint. Magna non ullamco in in
-							officia elit deserunt eu officia anim commodo deserunt eiusmod. Culpa do labore veniam velit
-							Lorem minim fugiat cillum cupidatat laborum et pariatur nulla esse. Aliquip adipisicing
-							minim incididunt officia officia incididunt sit est laborum magna.
+							<span>Why?</span> <br></br>The whole blockchain sphere has seen a dramatic spike in popularity over the past 3 years.
+							Decentralized Applications are everywhere in day-to-day life, but the atomic swap technology is relatively new to the scene.
+						Until recently, the only way to exchange coin from one blockchain to another, was through  centralized exchanges, whereas with atomic swaps,
+						and AutoSwap in particular, you can achieve that without a third party, and in a completely transparent way!
 						</p>
 						<p>
-							<span>How?</span> <br></br>Lorem nulla Lorem ex elit. Reprehenderit aliquip nostrud ut
-							commodo ex est duis culpa veniam excepteur commodo ullamco fugiat. Non amet exercitation
-							mollit do amet occaecat labore magna quis veniam. Minim pariatur exercitation consectetur
-							nulla. Laboris minim ex cillum consequat officia ipsum. Anim adipisicing in ea pariatur
-							labore ex adipisicing voluptate eiusmod enim excepteur ipsum aute commodo.
+							<span>How?</span> <br></br>The atomic swap process it pretty straightforward - we've created a liquidity pool where providers - investors, can
+							aggregate their funds in any coin they choose (on which they earn interest). The buyer (user) exchanges his coin of choice, let's say 1 ETH,
+							and wants to receive TRX. He will lock his ETH into the pool and, after cryptographically assuring the authenticity of this transaction, he will receive
+							the amount of TRX which is equal to the price of his ETH at that given time. 
 						</p>
 					</div>
 				</div>
