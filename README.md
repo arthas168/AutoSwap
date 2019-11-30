@@ -1,6 +1,6 @@
 ## What is AutoSwap?
 
-AutoSwap is a next generation atomic swap widget, working in an entirely decentralized manner, using smart contracts on the Ethereum and Tron blockchains. AutoSwap is currently in Beta Version 0.0.2, in future releases it will include swapping options for - BitCoin, AEternity, EOS, and many more. If you are new to the atomic swap technology, please check out this informative article - https://www.investopedia.com/terms/a/atomic-swaps.asp 
+AutoSwap is a next generation atomic swap widget, working in an entirely decentralized manner, using smart contracts on the Ethereum and Tron blockchains. AutoSwap is currently in Beta Version 0.0.2, in future releases it will include swapping options for BitCoin, AEternity, EOS, and many more. If you are new to the atomic swap technology, please check out this informative article - https://www.investopedia.com/terms/a/atomic-swaps.asp 
 
 ## Try it out
 
