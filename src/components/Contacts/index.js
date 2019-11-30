@@ -7,13 +7,14 @@ import Footer from '../Footer/';
 import Particles from 'react-particles-js';
 import { validateEmail } from '../../helpers/helperFns';
 
-export default function Contacts() {
+export default function Contacts(props) {
 	const globalContext = useContext(GlobalContext);
 	const { isDayMode, userEmail } = globalContext;
 
 	const [name, setName] = useState('');
 	const [text, setText] = useState('');
 	const [email, setEmail] = useState('');
+	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const [nameErrorMsg, setNameErrorMsg] = useState('');
 	const [textErrorMsg, setTextErrorMsg] = useState('');
@@ -61,13 +62,13 @@ export default function Contacts() {
 	const onSubmit = e => {
 		e.preventDefault();
 		if (name !== '' && text !== '') {
-			console.log('submit action');
+			setIsSubmitted(true);
 		} else {
 			if (name === '') {
 				setNameErrorMsg('Please enter a name!');
 			}
-			if (email === '') {
-				setEmailErrorMsg(userEmail ? '' : 'Please enter a valid email address!');
+			if (email === '' && userEmail === '') {
+				setEmailErrorMsg('Please enter a valid email address!');
 			}
 			if (text === '') {
 				setTextErrorMsg('Please enter text!');
@@ -86,50 +87,69 @@ export default function Contacts() {
 			<section id="contacts">
 				<Particles className="particles" />
 				<div className="container">
-					<Form>
-						<p>If you have any questions about our project, feel free to send a message!</p>
+					{!isSubmitted ? (
+						<Form>
+							<p>If you have any questions about our project, feel free to send a message!</p>
 
-						<Form.Group controlId="formBasicFirstName">
-							<Form.Label>Name</Form.Label>
-							<Form.Control type="name" placeholder="Name" onChange={e => onNameChange(e.target.value)} />
-						</Form.Group>
-						<span className="error-msg">{nameErrorMsg}</span>
-
-						<Form.Group controlId="formBasicEmail">
-							<Form.Label>Email</Form.Label>
-							{userEmail === '' ? (
+							<Form.Group controlId="formBasicFirstName">
+								<Form.Label>Name</Form.Label>
 								<Form.Control
-									type="email"
-									placeholder="Email Address"
-									onChange={e => {
-										onEmailChange(e.target.value);
-									}}
+									type="name"
+									placeholder="Name"
+									onChange={e => onNameChange(e.target.value)}
 								/>
-							) : (
-								<Form.Control type="email" placeholder={userEmail} disabled={true} />
-							)}
-						</Form.Group>
-						<span className="error-msg">{emailErrorMsg}</span>
+							</Form.Group>
+							<span className="error-msg">{nameErrorMsg}</span>
 
-						<Form.Group controlId="exampleForm.ControlTextarea1">
-							<Form.Label>Message</Form.Label>
-							<Form.Control
-								as="textarea"
-								rows="3"
-								placeholder="Write here..."
-								onChange={e => onTextChange(e.target.value)}
-							/>
-						</Form.Group>
-						<span className="error-msg">{textErrorMsg}</span>
+							<Form.Group controlId="formBasicEmail">
+								<Form.Label>Email</Form.Label>
+								{userEmail === '' ? (
+									<Form.Control
+										type="email"
+										placeholder="Email Address"
+										onChange={e => {
+											onEmailChange(e.target.value);
+										}}
+									/>
+								) : (
+									<Form.Control type="email" placeholder={userEmail} disabled={true} />
+								)}
+							</Form.Group>
+							<span className="error-msg">{emailErrorMsg}</span>
 
-						<Button
-							variant={isDayMode ? 'outline-dark' : 'secondary'}
-							type="submit"
-							onClick={e => onSubmit(e)}
-						>
-							Submit
-						</Button>
-					</Form>
+							<Form.Group controlId="exampleForm.ControlTextarea1">
+								<Form.Label>Message</Form.Label>
+								<Form.Control
+									as="textarea"
+									rows="3"
+									placeholder="Write here..."
+									onChange={e => onTextChange(e.target.value)}
+								/>
+							</Form.Group>
+							<span className="error-msg">{textErrorMsg}</span>
+
+							<Button
+								variant={isDayMode ? 'outline-dark' : 'secondary'}
+								type="submit"
+								onClick={e => onSubmit(e)}
+							>
+								Submit
+							</Button>
+						</Form>
+					) : (
+						<div className="thank-you">
+							<span>Thanks for your feedback! We will get back to you as soon as possible.</span>
+							<Button
+								variant={isDayMode ? 'info' : 'primary'}
+								type="submit"
+								onClick={() => {
+									props.history.push('/');
+								}}
+							>
+								Back to Home Page
+							</Button>
+						</div>
+					)}
 				</div>
 			</section>
 			<Footer />

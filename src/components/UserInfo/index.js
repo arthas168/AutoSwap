@@ -64,7 +64,7 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					// props.history.push('/user');
+					props.history.push('/user');
 				}
 			} else {
 				if (!isActionDeposit && amount > balance.trx) {
@@ -72,7 +72,7 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					// props.history.push('/user');
+					props.history.push('/user');
 				}
 			}
 		}
