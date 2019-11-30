@@ -21,6 +21,8 @@ export default function UserInfo(props) {
 	const { isDayMode, userEmail, balance, onUpdateBalance } = globalContext;
 	const { prices } = swapContext;
 
+	console.log(balance);
+
 	const [isActionClosed, setIsActionClosed] = useState(true);
 	const [isActionDeposit, setIsActionDeposit] = useState(false);
 	const [chosenCurrency, setChosenCurrency] = useState('ETH');
@@ -35,10 +37,7 @@ export default function UserInfo(props) {
 	useEffect(() => {
 		getTransactions(setTransactions);
 		getBalance(onUpdateBalance, userEmail);
-		 return () => {
-    // clean up
-  };
-	}, [onUpdateBalance, userEmail]);
+	}, []);
 
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
 		setIsActionClosed(actionStatus);
@@ -65,7 +64,7 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					// props.history.push('/');
+					// props.history.push('/user');
 				}
 			} else {
 				if (!isActionDeposit && amount > balance.trx) {
@@ -73,7 +72,7 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					// props.history.push('/');
+					// props.history.push('/user');
 				}
 			}
 		}
@@ -109,37 +108,33 @@ export default function UserInfo(props) {
 							Total Portfolio Value:{' '}
 							{balance ? <span className="green-span">{formatBalance()}$</span> : null}
 						</h1>
-
-						{balance !== {} ? (
-							<div className="currencies-list">
-								<div className="eth info-group">
-									<p>ETH (ETHEREUM) - {balance.eth}</p>
-									<p className="green-span">{balance.eth * prices['ETH']['USDT']}$</p>
-									<div className="buttons">
-										<Button onClick={() => onBtnClick(false, true, 'ETH')} variant="success">
-											Deposit
-										</Button>
-										<Button onClick={() => onBtnClick(false, false, 'ETH')} variant="danger">
-											Withdraw
-										</Button>
-									</div>
-								</div>
-								<div className="trx info-group">
-									<p>TRON (TRX) - {balance.trx}</p>
-									<p className="green-span">{balance.trx * prices['TRX']['USDT']}$</p>
-									<div className="buttons">
-										<Button onClick={() => onBtnClick(false, true, 'TRX')} variant="success">
-											Deposit
-										</Button>
-										<Button onClick={() => onBtnClick(false, false, 'TRX')} variant="danger">
-											Withdraw
-										</Button>
-									</div>
+						<div className="currencies-list">
+							<div className="eth info-group">
+								<p>ETH (ETHEREUM) - {balance.eth}</p>
+								<p className="green-span">{balance.eth * prices['ETH']['USDT']}$</p>
+								<div className="buttons">
+									<Button onClick={() => onBtnClick(false, true, 'ETH')} variant="success">
+										Deposit
+									</Button>
+									<Button onClick={() => onBtnClick(false, false, 'ETH')} variant="danger">
+										Withdraw
+									</Button>
 								</div>
 							</div>
-						) : (
-							<Spinner className="spinner currencies" animation="border" variant="primary" />
-						)}
+							<div className="trx info-group">
+								<p>TRON (TRX) - {balance.trx}</p>
+								<p className="green-span">{balance.trx * prices['TRX']['USDT']}$</p>
+								<div className="buttons">
+									<Button onClick={() => onBtnClick(false, true, 'TRX')} variant="success">
+										Deposit
+									</Button>
+									<Button onClick={() => onBtnClick(false, false, 'TRX')} variant="danger">
+										Withdraw
+									</Button>
+								</div>
+							</div>
+						</div>
+						)
 						<div className={'action ' + actionIsOpenClass}>
 							<span className="closer" onClick={() => setIsActionClosed(true)}>
 								X
