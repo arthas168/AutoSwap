@@ -35,7 +35,10 @@ export default function UserInfo(props) {
 	useEffect(() => {
 		getTransactions(setTransactions);
 		getBalance(onUpdateBalance, userEmail);
-	}, []);
+		 return () => {
+    // clean up
+  };
+	}, [onUpdateBalance, userEmail]);
 
 	const onBtnClick = (actionStatus, isDeposit, currency) => {
 		setIsActionClosed(actionStatus);
@@ -62,7 +65,7 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					props.history.push('/');
+					// props.history.push('/');
 				}
 			} else {
 				if (!isActionDeposit && amount > balance.trx) {
@@ -70,7 +73,7 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					props.history.push('/');
+					// props.history.push('/');
 				}
 			}
 		}
