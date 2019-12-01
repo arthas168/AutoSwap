@@ -6,6 +6,7 @@ import InvalidUrl from '../InvalidUrl';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { useAlert } from 'react-alert';
 import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
@@ -14,7 +15,8 @@ import { Spinner } from 'react-bootstrap';
 import { updateBalance, getBalance, getTransactions } from '../../helpers/firebaseFns';
 import { toDateTime } from '../../helpers/helperFns';
 
-export default function UserInfo(props) {
+const UserInfo = props => {
+	const alert = useAlert();
 	const globalContext = useContext(GlobalContext);
 	const swapContext = useContext(SwapContext);
 
@@ -64,7 +66,10 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					props.history.push('/user');
+					props.history.push('/');
+					alert.success(
+						`Successfully ${isActionDeposit ? 'deposited' : 'withdrawed'} ${amount} ${chosenCurrency}`
+					);
 				}
 			} else {
 				if (!isActionDeposit && amount > balance.trx) {
@@ -72,7 +77,10 @@ export default function UserInfo(props) {
 				} else {
 					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
 					setIsActionClosed(true);
-					props.history.push('/user');
+					props.history.push('/');
+					alert.success(
+						`Successfully ${isActionDeposit ? 'deposited' : 'withdrawed'} ${amount} ${chosenCurrency}`
+					);
 				}
 			}
 		}
@@ -198,4 +206,6 @@ export default function UserInfo(props) {
 	) : (
 		<InvalidUrl reason="userNotLogged" />
 	);
-}
+};
+
+export default UserInfo;

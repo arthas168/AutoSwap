@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 import GlobalState from './components/GlobalState';
 import SwapState from './components/Swap/swapState';
 import InvalidUrl from './components/InvalidUrl';
@@ -13,10 +15,17 @@ import Contacts from './components/Contacts';
 import './styles/main.scss';
 
 function AtomicSwap() {
+	const options = {
+		position: positions.BOTTOM_TOP,
+		timeout: 5000,
+		offset: '30px',
+		transition: transitions.SCALE,
+	};
 
 	return (
 		<GlobalState>
 			<SwapState>
+				<AlertProvider template={AlertTemplate} {...options}>
 					<Router>
 						<Switch>
 							<Route path="/" exact component={HomePage} />
@@ -29,6 +38,7 @@ function AtomicSwap() {
 							<Route path="*" component={InvalidUrl} />
 						</Switch>
 					</Router>
+				</AlertProvider>
 			</SwapState>
 		</GlobalState>
 	);
