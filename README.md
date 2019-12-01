@@ -44,7 +44,7 @@ Not much to say about the header, but in case you missed it - AutoSwap comes in 
 The lucky number 7 is hereby the last one of this quick overview! In the footer you'll see a message from the creator of AutoSwap - @arthas168, to the left. And to the right you'll see a button that brings you here, to learn more about the product from this informative and, I daresay, witty documentation! That'll be all for now, thank you for reading. Go along below to learn how you can try out AutoSwap locally, and the things you need to know to have a smooth testing experience.
 And remember, we're still in Beta!
 
-#### Try it out locally
+## Try it out locally
 
 In order to run AutoSwap locally for testing purposes, clone this repo and simply run
 
