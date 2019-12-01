@@ -3,11 +3,12 @@ import SwapContext from './swapContext';
 import GlobalContext from '../GlobalState/globalContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import { useAlert } from 'react-alert';
 import InvalidUrl from '../InvalidUrl';
 import Select from 'react-select';
 import customSelectStyles from './customSelectStyles';
 import tokens from './tokens';
-import validator from './validator';
+import validator from "../../helpers/numValidator";
 import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
@@ -19,7 +20,7 @@ export default function Swap(props) {
 	const globalContext = useContext(GlobalContext);
 	const { userEmail, isDayMode, balance, onUpdateBalance } = globalContext;
 	const [isSwapSubmitted, setIsSwapSubmitted] = useState(false);
-	const [error, setError] = useState('');
+	const alert = useAlert();
 
 	useEffect(() => {
 		getBalance(onUpdateBalance, userEmail);
@@ -58,16 +59,20 @@ export default function Swap(props) {
 	};
 
 	const onSwapSubmit = e => {
-		console.log(firstAmount);
 		e.preventDefault();
 		if (firstCurrency.value === 'trx') {
 			if (balance.trx >= firstAmount) {
 				if (firstAmount === 0 || firstAmount === '') {
-					setError('Amount cannot be 0!');
+					balance.trx === 0
+						? alert.error(`You have to deposit ETH first`)
+						: alert.error('amount must be a positive number');
 				} else {
 					if (firstCurrency.value === secondCurrency.value) {
-						setError('First and seccond currency cannot be the same!');
+						alert.error('first and second currency cannot be the same');
 					} else {
+						alert.success(
+							`successfully swapped ${firstAmount}${firstCurrency.label} for ${secondAmount}${secondCurrency.label}`
+						);
 						setIsSwapSubmitted(true);
 						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 						updateBalance(userEmail, false, 'TRX', firstAmount);
@@ -75,16 +80,23 @@ export default function Swap(props) {
 					}
 				}
 			} else {
-				setError(`Amount cannot be more than ${balance.trx}TRX!`);
+				balance.trx === 0
+					? alert.error(`You have to deposit TRX first`)
+					: alert.error(`Amount cannot be more than ${balance.trx}TRX!`);
 			}
 		} else {
 			if (balance.eth >= firstAmount) {
 				if (firstAmount === 0 || firstAmount === '') {
-					setError('Amount cannot be 0!');
+					balance.eth === 0
+						? alert.error(`You have to deposit ETH first`)
+						: alert.error('amount must be a positive number');
 				} else {
 					if (firstCurrency.value === secondCurrency.value) {
-						setError('First and seccond currency cannot be the same!');
+						alert.error('first and second currency cannot be the same');
 					} else {
+						alert.success(
+							`successfully swapped ${firstAmount}${firstCurrency.label} for ${secondAmount}${secondCurrency.label}`
+						);
 						setIsSwapSubmitted(true);
 						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 						updateBalance(userEmail, false, 'ETH', firstAmount);
@@ -92,7 +104,9 @@ export default function Swap(props) {
 					}
 				}
 			} else {
-				setError(`Amount cannot be more than ${balance.eth}ETH!`);
+				balance.eth === 0
+					? alert.error(`You have to deposit ETH first`)
+					: alert.error(`Amount cannot be more than ${balance.eth}ETH!`);
 			}
 		}
 	};
@@ -127,7 +141,6 @@ export default function Swap(props) {
 									}}
 								/>
 							</InputGroup>
-							<span>{error}</span>
 							<InputGroup className="mb-3">
 								<Select
 									styles={customSelectStyles()}

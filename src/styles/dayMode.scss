@@ -12,17 +12,16 @@ body.day {
 			text-shadow: 1px 1px 1px #000000;
 		}
 		.dashboard {
-		
-      text-shadow: none;
-      background: none;
-      border: 1px solid #f4f8fc;
+			text-shadow: none;
+			background: none;
+			border: 1px solid #f4f8fc;
 
 			span {
-        color: #f4f8fc;
-        span{
-          color: white;
-          font-weight:bold;
-        }
+				color: #f4f8fc;
+				span {
+					color: white;
+					font-weight: bold;
+				}
 			}
 		}
 	}
@@ -56,29 +55,30 @@ body.day {
 		}
 	}
 
-#userInfo{
-	.container{
-		span, h1, p {
-			text-shadow:none;
-		}
-		.info-group{
-			background: none !important;
-		}
-		.transaction-card{
-			background-color:#71B4BF;
-		}
+	#userInfo {
+		.container {
+			span,
+			h1,
+			p {
+				text-shadow: none;
+			}
+			.info-group {
+				background: none !important;
+			}
+			.transaction-card {
+				background-color: #71b4bf;
+			}
 
-		.info-table{
-			background:none;
-			
+			.info-table,
+			.action {
+				background: none;
+			}
 		}
 	}
-}
 
 	#footer {
 		ul {
-			background-color: #4CA1AF;
+			background-color: #4ca1af;
 		}
 	}
-
 }

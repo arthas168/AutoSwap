@@ -8,10 +8,7 @@ const GlobalState = props => {
 	const initialState = {
 		userEmail: '',
 		isDayMode: false,
-		balance: {
-			eth: 0,
-			trx: 0,
-		},
+		balance: null,
 	};
 
 	const [state, dispatch] = useReducer(GlobalReducer, initialState);

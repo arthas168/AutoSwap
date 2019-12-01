@@ -17,7 +17,7 @@ import './styles/main.scss';
 function AtomicSwap() {
 	const options = {
 		position: positions.BOTTOM_TOP,
-		timeout: 5000,
+		timeout: 10000,
 		offset: '30px',
 		transition: transitions.SCALE,
 	};
