@@ -10,7 +10,7 @@ AutoSwap is already up and running thanks to Firebase Hosting - https://atomic-s
 
 To help you get started with AutoSwap, here's a brief user story, where we'll be going through the workflow of the application step by step so any new user can follow along with ease. Along with that, you will learn about all of the components and elements in our website in detail.
 
-### 3. Public data
+### 1. Public data
 
 When you enter https://atomic-swap.web.app/, you'll be greeted with a simple home page - a menu on the top, footer on the bottom, and in the middle a greeting with two buttons - for log in and for register. You'll also see a dashboard (on the top left), where you can view the number of swaps being made on AutoSwap in real time. From the menu, you can also access the other public pages - About and Contacts. In About you'll find a brief overview of why we do what we do at AutoSwap and how we manage it. In Contacts you can fill a form to tell us what you think about the product, how we can improve it, etc. But also you can use the form to report bugs and issue complaints. All we need is an email so we can get back to you with a response.
 From the header, an unregistered user can also toggle dark and light color theme modes, but more on that in the Header section of this user story.
