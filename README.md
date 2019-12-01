@@ -12,6 +12,6 @@ and the project will start on port 3000.
 
 For now, AutoSwap is dependant on Firebase for its backend functionalities, so it's not needed to have a backend service running locally.
 
-But please be cautios, Firebase has a maximum allowed function calls per day. Don't get too playful. :)
+But please be cautios, Firebase has a maximum allowed function calls per day (5,000). Don't get too playful. :)
 
 IMPORTANT!!! If the backend isn't working properly and the data doesn't load, it's probably because AutoSwap is using https://cors-anywhere.herokuapp.com to handle the CORS Access-Control-Allow-Origin error. In order to solve this, try using the browser extension - Moesif Orign & CORS Changer. If that doesn't work, wait for the cors-anywhere service to work again, or better yet - help arthas168 fix this error with a pull request, or a message with a hint on how to solve it.
