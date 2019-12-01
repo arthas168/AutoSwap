@@ -26,6 +26,13 @@ export const toDateTime = secs => {
 	return t;
 };
 
+export const isNumeric = (n) => {
+	if (n.length === 0) {
+		return true;
+	}
+	return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 export const getRandomTime = () => {
 	let randMin = Math.floor(Math.random() * Math.floor(1));
 	let randSec1 = Math.floor(Math.random() * Math.floor(5));

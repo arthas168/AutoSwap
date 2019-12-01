@@ -1,7 +1,6 @@
 import React, { useState, Fragment, useContext, useEffect } from 'react';
 import GlobalContext from '../GlobalState/globalContext';
 import SwapContext from '../Swap/swapContext';
-import validator from "../../helpers/numValidator";
 import InvalidUrl from '../InvalidUrl';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
@@ -13,7 +12,7 @@ import Particles from 'react-particles-js';
 import Transaction from '../Transaction';
 import { Spinner } from 'react-bootstrap';
 import { updateBalance, getBalance, getTransactions } from '../../helpers/firebaseFns';
-import { toDateTime } from '../../helpers/helperFns';
+import { toDateTime, isNumeric } from '../../helpers/helperFns';
 
 const UserInfo = props => {
 	const alert = useAlert();
@@ -29,7 +28,7 @@ const UserInfo = props => {
 	const [isVeilOpen, setIsVeilOpen] = useState(false);
 	const [transactions, setTransactions] = useState();
 	const [chosenTransaction, setChosenTransaction] = useState();
-	const [amount, setAmount] = useState();
+	const [amount, setAmount] = useState(0);
 
 	let actionIsOpenClass = isActionClosed ? 'closed' : 'open';
 
@@ -54,32 +53,36 @@ const UserInfo = props => {
 	};
 
 	const onBalanceChange = (userEmail, isActionDeposit, chosenCurrency, amount) => {
-		if (amount <= 0) {
-			alert.error('amount must be a positive number');
-		} else {
-			if (chosenCurrency === 'ETH') {
-				if (!isActionDeposit && amount > balance.eth) {
-					alert.error("can't withdraw more than you have");
-				} else {
-					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
-					setIsActionClosed(true);
-					props.history.push('/');
-					alert.success(
-						`${amount}${chosenCurrency} successfully ${isActionDeposit ? 'deposited' : 'withdrawn'} `
-					);
-				}
+		if (isNumeric(amount)) {
+			if (amount <= 0) {
+				alert.error('amount must be a positive number');
 			} else {
-				if (!isActionDeposit && amount > balance.trx) {
-					alert.error("can't withdraw more than you have");
+				if (chosenCurrency === 'ETH') {
+					if (!isActionDeposit && amount > balance.eth) {
+						alert.error("can't withdraw more than you have");
+					} else {
+						updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
+						setIsActionClosed(true);
+						props.history.push('/');
+						alert.success(
+							`${amount}${chosenCurrency} successfully ${isActionDeposit ? 'deposited' : 'withdrawn'} `
+						);
+					}
 				} else {
-					updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
-					setIsActionClosed(true);
-					props.history.push('/');
-					alert.success(
-						`${amount}${chosenCurrency} successfully ${isActionDeposit ? 'deposited' : 'withdrawn'} `
-					);
+					if (!isActionDeposit && amount > balance.trx) {
+						alert.error("can't withdraw more than you have");
+					} else {
+						updateBalance(userEmail, isActionDeposit, chosenCurrency, amount);
+						setIsActionClosed(true);
+						props.history.push('/');
+						alert.success(
+							`${amount}${chosenCurrency} successfully ${isActionDeposit ? 'deposited' : 'withdrawn'} `
+						);
+					}
 				}
 			}
+		} else {
+			alert.error('amount must be a positive number');
 		}
 	};
 

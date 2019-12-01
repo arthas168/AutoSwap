@@ -8,7 +8,7 @@ import InvalidUrl from '../InvalidUrl';
 import Select from 'react-select';
 import customSelectStyles from './customSelectStyles';
 import tokens from './tokens';
-import validator from "../../helpers/validatorrs/numValidator";
+import validator from '../../helpers/numValidator';
 import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
@@ -29,6 +29,9 @@ export default function Swap(props) {
 	const renderer = ({ seconds, completed }) => {
 		if (completed) {
 			props.history.push('/user');
+			alert.success(
+				`successfully swapped ${firstAmount}${firstCurrency.label} for ${secondAmount}${secondCurrency.label}`
+			);
 			return null;
 		} else {
 			return <span>{seconds}</span>;
@@ -70,13 +73,11 @@ export default function Swap(props) {
 					if (firstCurrency.value === secondCurrency.value) {
 						alert.error('first and second currency cannot be the same');
 					} else {
-						alert.success(
-							`successfully swapped ${firstAmount}${firstCurrency.label} for ${secondAmount}${secondCurrency.label}`
-						);
 						setIsSwapSubmitted(true);
 						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 						updateBalance(userEmail, false, 'TRX', firstAmount);
 						updateBalance(userEmail, true, 'ETH', secondAmount);
+						alert.show('Please wait while transaction gets approved by the network');
 					}
 				}
 			} else {
@@ -94,13 +95,11 @@ export default function Swap(props) {
 					if (firstCurrency.value === secondCurrency.value) {
 						alert.error('first and second currency cannot be the same');
 					} else {
-						alert.success(
-							`successfully swapped ${firstAmount}${firstCurrency.label} for ${secondAmount}${secondCurrency.label}`
-						);
 						setIsSwapSubmitted(true);
 						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 						updateBalance(userEmail, false, 'ETH', firstAmount);
 						updateBalance(userEmail, true, 'TRX', secondAmount);
+						alert.show('Please wait while transaction gets approved by the network');
 					}
 				}
 			} else {
@@ -175,7 +174,7 @@ export default function Swap(props) {
 					) : (
 						<Fragment>
 							<Spinner className="spinner" animation="border" variant="primary" />
-							<Countdown date={Date.now() + 2000} renderer={renderer} />
+							<Countdown date={Date.now() + 5000} renderer={renderer} />
 						</Fragment>
 					)}
 				</div>
