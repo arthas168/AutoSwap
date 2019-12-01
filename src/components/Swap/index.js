@@ -67,7 +67,7 @@ export default function Swap(props) {
 			if (balance.trx >= firstAmount) {
 				if (firstAmount === 0 || firstAmount === '') {
 					balance.trx === 0
-						? alert.error(`You have to deposit ETH first`)
+						? alert.error(`You have to deposit TRX first (go to my profile page)`)
 						: alert.error('amount must be a positive number');
 				} else {
 					if (firstCurrency.value === secondCurrency.value) {
@@ -82,14 +82,14 @@ export default function Swap(props) {
 				}
 			} else {
 				balance.trx === 0
-					? alert.error(`You have to deposit TRX first`)
+					? alert.error(`You have to deposit TRX first (go to my profile page)`)
 					: alert.error(`Amount cannot be more than ${balance.trx}TRX!`);
 			}
 		} else {
 			if (balance.eth >= firstAmount) {
 				if (firstAmount === 0 || firstAmount === '') {
 					balance.eth === 0
-						? alert.error(`You have to deposit ETH first`)
+						? alert.error(`You have to deposit ETH first (go to my profile page)`)
 						: alert.error('amount must be a positive number');
 				} else {
 					if (firstCurrency.value === secondCurrency.value) {
@@ -104,7 +104,7 @@ export default function Swap(props) {
 				}
 			} else {
 				balance.eth === 0
-					? alert.error(`You have to deposit ETH first`)
+					? alert.error(`You have to deposit ETH first (go to my profile page)`)
 					: alert.error(`Amount cannot be more than ${balance.eth}ETH!`);
 			}
 		}
