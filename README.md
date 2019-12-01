@@ -2,7 +2,11 @@
 
 AutoSwap is a next generation atomic swap widget, working in an entirely decentralized manner, using smart contracts on the Ethereum and Tron blockchains. AutoSwap is currently in Beta Version 0.0.2, in future releases it will include swapping options for Bitcoin, AEternity, EOS, and many more. If you are new to the atomic swap technology, please check out this informative article - https://www.investopedia.com/terms/a/atomic-swaps.asp 
 
-## Try it out
+## Open AutoSwap
+
+AutoSwap is already up and running thanks to Firebase Hosting - https://atomic-swap.web.app/
+
+## Try it out locally
 
 In order to run AutoSwap locally for testing purposes, clone this repo and simply run
 
