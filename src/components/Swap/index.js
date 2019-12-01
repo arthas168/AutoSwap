@@ -34,7 +34,7 @@ export default function Swap(props) {
 			);
 			return null;
 		} else {
-			return <span>{seconds}</span>;
+			return null;
 		}
 	};
 
@@ -77,7 +77,7 @@ export default function Swap(props) {
 						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 						updateBalance(userEmail, false, 'TRX', firstAmount);
 						updateBalance(userEmail, true, 'ETH', secondAmount);
-						alert.show('Please wait while transaction gets approved by the network');
+						alert.show('Please wait while transaction gets approved by the blockchain networks');
 					}
 				}
 			} else {
@@ -99,7 +99,7 @@ export default function Swap(props) {
 						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
 						updateBalance(userEmail, false, 'ETH', firstAmount);
 						updateBalance(userEmail, true, 'TRX', secondAmount);
-						alert.show('Please wait while transaction gets approved by the network');
+						alert.show('Please wait while transaction gets approved by the blockchain networks');
 					}
 				}
 			} else {
