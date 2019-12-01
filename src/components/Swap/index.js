@@ -8,7 +8,7 @@ import InvalidUrl from '../InvalidUrl';
 import Select from 'react-select';
 import customSelectStyles from './customSelectStyles';
 import tokens from './tokens';
-import validator from "../../helpers/numValidator";
+import validator from "../../helpers/validatorrs/numValidator";
 import Header from '../Header/';
 import Footer from '../Footer/';
 import Particles from 'react-particles-js';
