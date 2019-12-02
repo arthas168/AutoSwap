@@ -20,6 +20,7 @@
 
 			.input-group {
 				width: 340px;
+				margin-bottom: 0 !important;
 			}
 
 			p {
@@ -28,9 +29,18 @@
 				color: #f4f8fc;
 				text-shadow: 1px 1px 1px #000000;
 				font-weight: 550;
-				margin-bottom: 2rem;
+				margin-bottom: 1rem;
 				width: 80%;
 				text-align: center;
+			}
+
+			.subtext {
+				margin-bottom: 0;
+				text-align: left;
+				width: 63%;
+				&:first-of-type {
+					margin-top: 0.5rem;
+				}
 			}
 
 			span {

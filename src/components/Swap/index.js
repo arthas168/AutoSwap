@@ -119,6 +119,7 @@ export default function Swap(props) {
 					{!isSwapSubmitted ? (
 						<div className="form">
 							<p>Choose a token pair and enter the amount you wish to swap</p>
+							<p className="subtext">Send</p>
 							<InputGroup className="mb-3">
 								<Select
 									styles={customSelectStyles()}
@@ -139,6 +140,7 @@ export default function Swap(props) {
 										handleInputChange(e.target.value, 'first');
 									}}
 								/>
+								<p className="subtext">Receive</p>
 							</InputGroup>
 							<InputGroup className="mb-3">
 								<Select
