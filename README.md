@@ -33,7 +33,7 @@ After a successful swap, what's left is to withdraw your newly owned coins. So b
 
 ### 5. My Profile
 
-The My Profile page holds information about the users balance, it's value in USD, along with the same for each coin you have stored in your "virtual wallet". To the right you'll see a scrollable list with all the transactions (swaps) you've made, ordered in descending order, sorted by the date on which they were executed. On every swap block you'll see a "More Info" button, which on clicked reveals detailed information about the swap, including the prices of both coins at the time of the swap and many more useful data. 
+The My Profile page holds information about the users balance, it's value in USD, along with the same for each coin you have stored in your "virtual wallet". To the right you'll see a scrollable list with all the transactions (swaps) you've made. On every swap block you'll see a "More Info" button, which on clicked reveals detailed information about the swap, including the prices of both coins at the time of the swap and many more useful data. 
 
 ### 6. Header
 
