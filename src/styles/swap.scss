@@ -20,7 +20,8 @@
 
 			.input-group {
 				width: 340px;
-				margin-bottom: 0 !important;
+				margin-bottom: 2.5rem !important;
+				position: relative;
 			}
 
 			p {
@@ -29,18 +30,18 @@
 				color: #f4f8fc;
 				text-shadow: 1px 1px 1px #000000;
 				font-weight: 550;
-				margin-bottom: 1rem;
+				margin-bottom: 2rem;
 				width: 80%;
 				text-align: center;
 			}
 
 			.subtext {
-				margin-bottom: 0;
+				position: absolute;
+				left: 0;
+				bottom: 5px;
 				text-align: left;
-				width: 63%;
-				&:first-of-type {
-					margin-top: 0.5rem;
-				}
+				font-size:14px;
+				z-index:0 !important;
 			}
 
 			span {
@@ -50,9 +51,6 @@
 				&.hidden {
 					display: none;
 				}
-			}
-			button {
-				margin-top: 2rem;
 			}
 		}
 	}
