@@ -131,7 +131,7 @@ const UserInfo = props => {
 									</div>
 								</div>
 								<div className="trx info-group">
-									<p>TRON (TRX) - {balance.trx}</p>
+									<p>TRX (TRON) - {balance.trx}</p>
 									<p className="green-span">{balance.trx * prices['TRX']['USDT']}$</p>
 									<div className="buttons">
 										<Button onClick={() => onBtnClick(false, true, 'TRX')} variant="success">
