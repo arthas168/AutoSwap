@@ -56,6 +56,15 @@ export default (state, action) => {
                 );
                 baseAmount = parseFloat(Number(baseAmount).toFixed(value.decimals));
 
+                if (value.label === state.secondCurrency.label) {
+                    return {
+                        ...state,
+                        firstCurrency: value,
+                        secondCurrency: state.firstCurrency,
+                        firstAmount: state.secondAmount,
+                        secondAmount: state.firstAmount,
+                    };
+                }
                 return {
                     ...state,
                     secondAmount: quoteAmount,
@@ -71,7 +80,15 @@ export default (state, action) => {
                     ];
                 baseAmount = parseFloat(Number(baseAmount).toFixed(state.firstCurrency.decimals));
                 quoteAmount = parseFloat(Number(quoteAmount).toFixed(value.decimals));
-
+                if (value.label === state.firstCurrency.label) {
+                    return {
+                        ...state,
+                        secondCurrency: value,
+                        firstCurrency: state.secondCurrency,
+                        firstAmount: state.secondAmount,
+                        secondAmount: state.firstAmount,
+                    };
+                }
                 return {
                     ...state,
                     firstAmount: baseAmount,
