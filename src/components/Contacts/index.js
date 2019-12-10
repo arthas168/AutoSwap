@@ -61,13 +61,13 @@ export default function Contacts(props) {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		if (name !== '' && text !== '') {
+		if (name !== '' && text !== '' && email!=='') {
 			setIsSubmitted(true);
 		} else {
 			if (name === '') {
 				setNameErrorMsg('Please enter a name!');
 			}
-			if (email === '' && userEmail === '') {
+			if (email === '') {
 				setEmailErrorMsg('Please enter a valid email address!');
 			}
 			if (text === '') {
@@ -80,7 +80,7 @@ export default function Contacts(props) {
 		let hasNumber = /\d/;
 		return hasNumber.test(n);
 	}
-
+console.log(email)
 	return (
 		<Fragment>
 			<Header />
