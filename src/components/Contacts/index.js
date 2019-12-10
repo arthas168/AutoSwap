@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState, useEffect } from 'react';
 import GlobalContext from '../GlobalState/globalContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
@@ -19,6 +19,10 @@ export default function Contacts(props) {
 	const [nameErrorMsg, setNameErrorMsg] = useState('');
 	const [textErrorMsg, setTextErrorMsg] = useState('');
 	const [emailErrorMsg, setEmailErrorMsg] = useState('');
+
+	useEffect(() => {
+		setEmail(userEmail)
+	}, [userEmail]);
 
 	const onNameChange = newName => {
 		if (newName === '') {
@@ -61,7 +65,7 @@ export default function Contacts(props) {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		if (name !== '' && text !== '' && email!=='') {
+		if (name !== '' && text !== '' && email !== '') {
 			setIsSubmitted(true);
 		} else {
 			if (name === '') {
@@ -80,7 +84,6 @@ export default function Contacts(props) {
 		let hasNumber = /\d/;
 		return hasNumber.test(n);
 	}
-console.log(email)
 	return (
 		<Fragment>
 			<Header />
@@ -112,7 +115,7 @@ console.log(email)
 										}}
 									/>
 								) : (
-									<Form.Control type="email" placeholder={userEmail} disabled={true} />
+									<Form.Control type="email" value={userEmail} disabled={true} />
 								)}
 							</Form.Group>
 							<span className="error-msg">{emailErrorMsg}</span>
