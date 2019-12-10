@@ -178,7 +178,7 @@ export default function Swap(props) {
 					) : (
 						<Fragment>
 							<Spinner className="spinner" animation="border" variant="primary" />
-							<Countdown date={Date.now() + 5000} renderer={renderer} />
+							<Countdown date={Date.now() + 2000} renderer={renderer} />
 						</Fragment>
 					)}
 				</div>
