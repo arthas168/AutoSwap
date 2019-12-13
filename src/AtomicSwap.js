@@ -28,9 +28,6 @@ function AtomicSwap() {
 				<AlertProvider template={AlertTemplate} {...options}>
 					<Router>
 						<Switch>
-							<Route path="/" exact component={HomePage} />
-							<Route path="/swap" component={Swap} />
-							<Route path="/user" component={UserInfo} />
 							<Route path="/login" component={LoginView} />
 							<Route path="/register" component={RegisterView} />
 							<Route path="/about" component={About} />
