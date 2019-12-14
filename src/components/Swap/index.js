@@ -86,26 +86,30 @@ export default function Swap(props) {
 					: alert.error(`Amount cannot be more than ${balance.trx}TRX!`);
 			}
 		} else {
-			if (balance.eth >= firstAmount) {
-				if (firstAmount === 0 || firstAmount === '') {
+			if (balance) {
+				if (balance.eth >= firstAmount) {
+					if (firstAmount === 0 || firstAmount === '') {
+						balance.eth === 0
+							? alert.error(`You have to deposit ETH first (go to my profile page)`)
+							: alert.error('amount must be a positive number');
+					} else {
+						if (firstCurrency.value === secondCurrency.value) {
+							alert.error('first and second currency cannot be the same');
+						} else {
+							setIsSwapSubmitted(true);
+							createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
+							updateBalance(userEmail, false, 'ETH', firstAmount);
+							updateBalance(userEmail, true, 'TRX', secondAmount);
+							alert.show('swapping...');
+						}
+					}
+				} else {
 					balance.eth === 0
 						? alert.error(`You have to deposit ETH first (go to my profile page)`)
-						: alert.error('amount must be a positive number');
-				} else {
-					if (firstCurrency.value === secondCurrency.value) {
-						alert.error('first and second currency cannot be the same');
-					} else {
-						setIsSwapSubmitted(true);
-						createTransaction(firstAmount, secondAmount, firstCurrency, secondCurrency, userEmail);
-						updateBalance(userEmail, false, 'ETH', firstAmount);
-						updateBalance(userEmail, true, 'TRX', secondAmount);
-						alert.show('swapping...');
-					}
+						: alert.error(`Amount cannot be more than ${balance.eth}ETH!`);
 				}
-			} else {
-				balance.eth === 0
-					? alert.error(`You have to deposit ETH first (go to my profile page)`)
-					: alert.error(`Amount cannot be more than ${balance.eth}ETH!`);
+			}else{
+				alert.error(`You have to deposit ${firstCurrency.label} first (go to my profile page)`)
 			}
 		}
 	};
@@ -176,16 +180,16 @@ export default function Swap(props) {
 							</Button>
 						</div>
 					) : (
-						<Fragment>
-							<Spinner className="spinner" animation="border" variant="primary" />
-							<Countdown date={Date.now() + 2000} renderer={renderer} />
-						</Fragment>
-					)}
+							<Fragment>
+								<Spinner className="spinner" animation="border" variant="primary" />
+								<Countdown date={Date.now() + 2000} renderer={renderer} />
+							</Fragment>
+						)}
 				</div>
 			</section>
 			<Footer />
 		</Fragment>
 	) : (
-		<InvalidUrl reason="userNotLogged" />
-	);
+			<InvalidUrl reason="userNotLogged" />
+		);
 }
